@@ -11,7 +11,5 @@ public class Application {
         InterProduct inter = new Product();
         inter.nonStaticMethod(2);
 
-
-
     }
 }

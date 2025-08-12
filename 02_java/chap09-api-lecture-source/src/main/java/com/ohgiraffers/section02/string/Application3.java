@@ -1,5 +1,7 @@
 package com.ohgiraffers.section02.string;
 
+import java.awt.*;
+
 public class Application3 {
     public static void main(String[] args) {
         /* 수업목표. String 클래스의 자주 사용하는 메소드를 숙지하고 응용할 수 있다. */

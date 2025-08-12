@@ -1,8 +1,8 @@
 package com.ohgiraffers.section2.abstractclass;
 
-public class Phone extends Product {
+public class iphone extends Product {
 
-    public Phone() {
+    public iphone() {
         super();
     }
 

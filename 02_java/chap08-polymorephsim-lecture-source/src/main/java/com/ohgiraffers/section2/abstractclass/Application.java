@@ -3,7 +3,7 @@ package com.ohgiraffers.section2.abstractclass;
 public class Application {
     public static void main(String[] args) {
 
-        Phone smartPhone = new Phone();
+        iphone smartPhone = new iphone();
 
         /* 설명. 객체를 생성할 수 없는 불완전한 클래스로써의 추상 클래스 */
 //        Product product = new Product();      // 추상클래스가 되면 생성자를 통한 객체를 생성할 수 없다.
@@ -13,7 +13,7 @@ public class Application {
         smartPhone.staticMethod();
         Product.staticMethod();
 
-        Product p = new Phone();                 // 다형성
+        Product p = new iphone();                 // 다형성
         p.abstractMethod();
         p.nonStaticMethod();
     }

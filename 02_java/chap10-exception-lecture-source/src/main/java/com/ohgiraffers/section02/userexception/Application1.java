@@ -26,6 +26,7 @@ public class Application1 {
             et.checkEnoughMoney(30000, 10000);
         } catch(PriceNegativeException e){
             System.out.println("가격이 음수라니!");
+            System.out.println(e.getMessage());
         } catch(MoneyNegativeException e){
             System.out.println("너 빚쟁이?");
         } catch(NotEnoughMoneyException e){

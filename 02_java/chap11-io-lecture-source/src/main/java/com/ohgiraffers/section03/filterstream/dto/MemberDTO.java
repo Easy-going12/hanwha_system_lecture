@@ -8,7 +8,9 @@ public class MemberDTO implements Serializable {
 //    private static final long serialVersionUID = 1L;
 
     private String id;
-    private String pwd;
+
+    /* 설명. transient 키워드가 달린 필드는 객체 입출력의 직렬화에서 제외됨(보안성) */
+    private transient String pwd;
     private String name;
     private String email;
     private int age;

@@ -13,6 +13,8 @@ public class Application4 {
             fw.write("한글");
             fw.write("짱\n");
             fw.write("세종대왕 만만세!");
+
+            fw.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         } finally {

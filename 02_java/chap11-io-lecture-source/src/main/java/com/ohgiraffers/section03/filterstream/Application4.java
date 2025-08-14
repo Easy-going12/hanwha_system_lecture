@@ -8,7 +8,7 @@ public class Application4 {
     public static void main(String[] args) {
 
         MemberDTO[] members = new MemberDTO[3];
-        members[0] = new MemberDTO("user01","pass01","홍길동","hong123@gmail.com"
+        members[0] = new MemberDTO("user1","pass01","홍길동","h0ong123@gmail.com"
         , 25,'남');
         members[1] = new MemberDTO("user02","pass02","유관순","Korea31@gmail.com"
                 , 16,'여');

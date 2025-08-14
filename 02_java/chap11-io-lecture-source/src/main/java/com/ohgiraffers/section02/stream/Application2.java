@@ -15,7 +15,7 @@ public class Application2 {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(
-                    "src/main/java/com/ohgiraffers/section02/stream.testOutputStream.txt",
+                    "src/main/java/com/ohgiraffers/section02/stream/testOutputStream.txt",
                     true);
 
             fos.write(97);

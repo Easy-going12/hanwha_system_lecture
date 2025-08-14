@@ -12,7 +12,7 @@ public class Application1 {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream("src/main/java/com/ohgiraffers/section02/stream/testInputStream.txt");
-            System.out.println((char)fis.read());
+            System.out.println(fis.read());
             System.out.println((char)fis.read());
             System.out.println((char)fis.read());
             System.out.println((char)fis.read());

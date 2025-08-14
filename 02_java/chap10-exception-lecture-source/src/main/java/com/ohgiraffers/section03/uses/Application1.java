@@ -20,6 +20,9 @@ public class Application1 {
 
         try {
             br = new BufferedReader(new FileReader(new File("test1.dat")));
+            // 오류
+            // 실행
+            //이 부분 오류
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }finally {

@@ -20,20 +20,22 @@ public class Application1 {
 
         /* 설명. 예외처리를 하면 우리가 원하는 데로 진행 됨(프로그램 종류 안되게, 그 외에 다양하게) */
         try{
-//            et.checkEnoughMoney(30000, 40000);
+            et.checkEnoughMoney(30000, 40000);
             et.checkEnoughMoney(-30000, 40000);
-//            et.checkEnoughMoney(30000, -40000);
+            et.checkEnoughMoney(30000, -40000);
             et.checkEnoughMoney(30000, 10000);
         } catch(PriceNegativeException e){
             System.out.println("가격이 음수라니!");
             System.out.println(e.getMessage());
         } catch(MoneyNegativeException e){
+
             System.out.println("너 빚쟁이?");
+        /* 설명. multi-cathc block */
         } catch(NotEnoughMoneyException e){
             System.out.println("돈이 부족한걸?");
         }
         catch(Exception e){
-            e.printStackTrace();
+            System.out.println("모든 예외 처리 가능");
         }
 
         System.out.println("프로그램을 종료합니다.");

@@ -1,9 +1,13 @@
 package com.ohgiraffers.section03.filterstream;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Application1 {
     public static void main(String[] args) throws IOException {
+
+        Scanner sc = new Scanner(System.in);
+
 
         /* 수업목표. BufferedWriter와 BufferedReader에 대해 이해하고 사용할 수 있다. */
 

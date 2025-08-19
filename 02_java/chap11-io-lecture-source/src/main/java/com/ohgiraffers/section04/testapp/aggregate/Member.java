@@ -1,8 +1,9 @@
 package com.ohgiraffers.section04.testapp.aggregate;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Member {
+public class Member implements Serializable {
     private int memNo;
     private String id;
     private String pwd;
@@ -12,11 +13,9 @@ public class Member {
     private AccountStatus accountStatus;
 
     public Member() {
-
     }
 
-    /* 설명. 회원가입 시 사용자가 입력한 값을 지진 Member 객체가 되기 위한 생성자 */
-
+    /* 설명. 회원가입 시 사용자가 입력한 값을 지닌 Member 객체가 되기 위한 생성자 */
     public Member(String id, String pwd, int age, String[] hobbies, BloodType bloodType) {
         this.id = id;
         this.pwd = pwd;

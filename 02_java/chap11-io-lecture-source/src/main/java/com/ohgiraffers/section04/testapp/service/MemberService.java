@@ -57,4 +57,31 @@ public class MemberService {
             System.out.println("회원 가입 실패");
         }
     }
+
+    public Member findMemberForMod(int memNo) {
+
+        Member selectedMember = memberRepository.findMemberBy(memNo);
+        Member copyMember = null;
+        if(selectedMember != null) {
+            /* 설명. 프론트로 반환하기 전에 사본 만들어 Repository가 가진 회원 객체 대신 사본을 변환함(feat. 오염 방지) */
+            copyMember = new Member();
+            copyMember.setMemNo(selectedMember.getMemNo());
+            copyMember.setId(selectedMember.getId());
+            copyMember.setPwd(selectedMember.getPwd());
+            copyMember.setAge(selectedMember.getAge());
+
+            /* 설명. 취미의 경우는 배열이므로 깊은 복사를 해 주어야 한다. */
+            String[] copiedHobbies = selectedMember.getHobbies();
+            copyMember.setHobbies(copiedHobbies);
+            copyMember.setBloodType((selectedMember.getBloodType()));
+            copyMember.setAccountStatus(selectedMember.getAccountStatus());
+        } else{
+            System.out.println("그런 회원은 없네요.");
+        }
+
+        return copyMember;
+    }
+
+    public void modifyMember(Object selectMember) {
+    }
 }

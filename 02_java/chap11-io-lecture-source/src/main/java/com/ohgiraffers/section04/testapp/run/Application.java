@@ -34,7 +34,14 @@ public class Application {
                 case 1: ms.findAllMembers(); break;
                 case 2: ms.findMemberBy(chooseMemNo()); break;
                 case 3: ms.registMember(signup());break;
-                case 4: break;
+                case 4:
+                    /* 설명. 회원 조회(조회가 되었다고 가정) */
+                    Member selectMember = ms.findMemberForMod(chooseMemNo());   // 기존 회원 사본 객체 반환 받기
+
+                    /* 설명. 수정을 위해 입력된 내용을 바탕으로 회원 수정 */
+                    ms.modifyMember(reform(selectMember));      // 수정된 내용을 담은 기존 회원 사본 객체 넘기기
+
+                    break;
                 case 5: break;
                 case 9:
                     System.out.println("프로그램을 종료하겠습니다.");
@@ -43,6 +50,75 @@ public class Application {
                     System.out.println("번호를 잘못 입력하셨습니다.");
             }
         }
+    }
+
+    private static Object reform(Member modifyMember) {
+
+        Scanner sc = new Scanner(System.in);
+
+        boolean flag = true;
+        while(flag){
+            System.out.println("===== 회원 정보 수정 서브 메뉴 =====");
+            System.out.println("1. 패스워드");
+            System.out.println("2. 나이");
+            System.out.println("3. 취미");
+            System.out.println("4. 혈액형");
+            System.out.println("9. 메인 메뉴로 돌아가기");
+            System.out.print("수정 할 번호를 입력하세요: ");
+            int chooseNo = sc.nextInt();
+            sc.nextLine();      // 버퍼 제거
+            switch(chooseNo){
+                case 1:
+                    System.out.print("수정 할 패스워드를 입력하세요: ");
+                    modifyMember.setPwd(sc.nextLine());
+                    break;
+                case 2:
+                    System.out.print("수정 할 나이를 입력하세요: ");
+                    modifyMember.setAge(sc.nextInt());
+                    break;
+                case 3:
+                    System.out.println("수정할 취미를 입력하세요: ");
+                    modifyMember.setHobbies(resetHobbies());        // 배열은 단순 Scanner 입력 불가
+                    break;
+                case 4:
+                    System.out.println("수정 할 혈액형을 입력하세요(A, B, AB, O): ");
+                    modifyMember.setBloodType(resetBloodType());    // enum은 단순 Scanner 입력 불가
+                    break;
+                case 9:
+                    System.out.println("메인 메뉴로 돌아갑니다."); flag = false; break;
+                default:
+                    System.out.println("번호를 다시 잘 입력해 주세요.");
+            }
+
+        }
+        return modifyMember;
+    }
+
+    private static BloodType resetBloodType() {
+        Scanner sc = new Scanner(System.in);
+        String bloodType = sc.nextLine();
+        BloodType bt = null;
+        switch(bloodType){
+            case "A": bt = BloodType.A; break;
+            case "B": bt = BloodType.B; break;
+            case "AB": bt = BloodType.AB;break;
+            case "O": bt = BloodType.O;
+        }
+
+        return bt;
+    }
+
+    private static String[] resetHobbies() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("몇 개의 취미를 입력하시겠습니까?");
+        String[] hobbies = new String[sc.nextInt()];
+        sc.nextLine();      // 버퍼 제거
+        for(int i = 0; i<hobbies.length; i++){
+            System.out.print((i + 1) + "번째 취미를 입력하세요: ");
+            hobbies[i] = sc.nextLine();
+        }
+
+        return hobbies;
     }
 
     private static int chooseMemNo() {

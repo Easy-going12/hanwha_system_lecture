@@ -128,4 +128,21 @@ public class MemberRepository {
 
         return 0;
     }
+
+    public int removeMembeer(int memNo) {
+        int result = 0;
+
+        for(Member member: memberList) {
+            if(member.getMemNo() == memNo) {
+                member.setAccountStatus(AccountStatus.DEACTIVE);
+
+                saveMembers(memberList);
+
+                result = 1;
+                break;
+            }
+        }
+
+        return result;
+    }
 }

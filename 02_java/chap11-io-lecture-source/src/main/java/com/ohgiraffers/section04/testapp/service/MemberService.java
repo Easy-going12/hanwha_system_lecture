@@ -91,4 +91,14 @@ public class MemberService {
             System.out.println("회원 정보 수정에 실패하였습니다.");
         }
     }
+
+    public void removeMember(int memNo) {
+        int result = memberRepository.removeMembeer(memNo);
+
+        if(result > 0){
+            System.out.println("회원님 그동안 감사했습니다.");
+        }else{
+            System.out.println("탈퇴에 실패하셨습니다.");
+        }
+    }
 }

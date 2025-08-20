@@ -82,6 +82,13 @@ public class MemberService {
         return copyMember;
     }
 
-    public void modifyMember(Object selectMember) {
+    public void modifyMember(Member reformdMember) {
+        int result = memberRepository.modifyMember(reformdMember);
+
+        if(result > 0) {
+            System.out.println(reformdMember.getId() + "회원님의 정보 수정에 성공하였습니다.");
+        }else {
+            System.out.println("회원 정보 수정에 실패하였습니다.");
+        }
     }
 }

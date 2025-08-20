@@ -71,13 +71,20 @@ public class MemberRepository {
         }
     }
 
+
     public ArrayList<Member> findAllMembers() {
-        return memberList;
+        ArrayList<Member> returnList = new ArrayList<>();
+        for(Member member: memberList) {
+            if(member.getAccountStatus() == AccountStatus.ACTIVE) {
+                memberList.add(member);
+            }
+        }
+        return returnList;
     }
 
     public Member findMemberBy(int memNo) {
         for (Member member: memberList) {
-            if (member.getMemNo() == memNo) {
+            if (member.getMemNo() == memNo && member.getAccountStatus() == AccountStatus.ACTIVE) {
                 return member;
             }
         }

@@ -3,6 +3,21 @@ package com.ohgiraffers.section02.uses.subsection01.geneeration;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+/* 설명.
+ *  스트림의 파이프라인(pipline)이란?
+ *   - 일련의 연산체인
+ *   - 1. 소스(Source): IntStream.range(1, 10) - 데이터 원본
+ *   - 2. 중계연산(Intermediate Operation): .filter(), .map() - 데이터 가공
+ *   - 3. 최종연산(Terminal Operation): .forEach() - 결과 처리 (반환형이 Stream X)
+ *
+ *  설명.
+ *   파이프라인의 특징
+ *    - 1. 메소드 체이닝: 각 연산이 Stream을 반환해서 연속적으로 메소드 연결 가능
+ *    - 2. 지연 평가: 최종 연산이 호출될 때까지  중계 연산은 실행되지 않음
+ *    - 3. 읽기 전용: 원본 데이터는 변경되지 않음
+ *    - 4. 단방향 흐름: 물이 파이프를 타고 흐르듯 데이터가 한 방향으로 처리됨
+ *    - 5. 소모성: 스트림을 순회하고 나면 새로운 스트림을 생성해햐 함
+* */
 public class Application {
     public static void main(String[] args) {
 

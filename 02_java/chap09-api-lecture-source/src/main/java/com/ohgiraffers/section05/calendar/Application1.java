@@ -7,11 +7,11 @@ public class Application1 {
 
         /* 수업목표. java.util.Data 클래스 사용법을 이해할 수 있다. */
         java.util.Date today = new java.util.Date();
-        System.out.println("today= " + today);
-
-        System.out.println("long 타입 시간: " + today.getTime());
-        System.out.println("long 타입 시간: " + new java.util.Date(0L));
-        System.out.println("long 타입 시간: " + new java.util.Date(today.getTime()));
+//        System.out.println("today= " + today);
+//
+//        System.out.println("long 타입 시간: " + today.getTime());
+//        System.out.println("long 타입 시간: " + new java.util.Date(0L));
+//        System.out.println("long 타입 시간: " + new java.util.Date(today.getTime()));
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String todayFormat = sdf.format(today);

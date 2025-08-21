@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /* 설명. 트랜잭션 처리(DB와의 CRUD 이후 성공 및 실패 여부 처리) 및 비즈니스 로직 담당 및 유효성 검사 */
 public class MemberService {
 
-    //    private final MemberRepository memberRepository = new MemberRepository();
+    // private final MemberRepository memberRepository = new MemberRepository();
     private final MemberRepository memberRepository;
 
     public MemberService() {

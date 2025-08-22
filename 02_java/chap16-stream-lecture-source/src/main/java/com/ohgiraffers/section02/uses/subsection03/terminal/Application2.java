@@ -44,7 +44,7 @@ public class Application2 {
         /* 설명. 3. 병렬 처리용 reduce: 1개의 초기값, 1개의 누적용 람다식, 1개의 결합용 람다식 */
         /* 설명. 세 번째로 전달된 람다식은 병렬 스트림 일때만 활용하는 cpu의 여러 코어로 계산한 결과를 결합 할 용도의 람다식이다. */
         Integer reduceTreeParam = Stream.of(4,5,1,2,3,9,6,7,8,10)
-//                .parallel()                   // 주석을 통해 순차 스트림과ㅏ 병렬 스트림 모두 테스트 해 볼 수 있음.
+                .parallel()                   // 주석을 통해 순차 스트림과ㅏ 병렬 스트림 모두 테스트 해 볼 수 있음.
                 .reduce(1,             // 초기값은 paraller일 경우는 요소 갯수만큼 적용
                         (a,b) -> {
                             System.out.printf("%d, %d\n",a,b);

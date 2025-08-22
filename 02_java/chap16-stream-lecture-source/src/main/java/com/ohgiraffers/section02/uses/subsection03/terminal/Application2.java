@@ -1,0 +1,53 @@
+package com.ohgiraffers.section02.uses.subsection03.terminal;
+
+/* 설명.
+ *  reduce()란?
+ *     - 스트림의 요소들을 하나의 값으로 줄이는(reduce) 최종연산
+ *     - 누적 연산을 통해 스트림의 모든 요소를 단일 결과로 결합
+ *     - BinaryOperator 형태의 람다식 활용
+* */
+
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+public class Application2 {
+    public static void main(String[] args) {
+
+        /* 수업 목표. reduce() 최종 연산자를 활용할 수 있다. */
+        /* 설명. 1. 기본 reduce: 1개의 매개변수에 람다식 작성 */
+        OptionalInt reduceOneParam = IntStream.range(1, 6)
+                                            .reduce((a, b) -> {
+                                                System.out.printf("%d, %d\n",a,b);
+                                                return a + b;
+                                            });
+        System.out.println("최종 결과: " + reduceOneParam.orElse(0));
+        System.out.println();
+
+        /* 설명. 2. 초기값을 가진 reduce: 1개의 초기값, 1개의 람다식 */
+        int reduceTwoParam = IntStream.range(1,6)
+                                    .reduce(100, (a,b) -> {
+                                         System.out.printf("%d, %d\n",a,b);
+                                         return a+b;
+                                    });
+        System.out.println("최종 결과: " + reduceTwoParam);
+        System.out.println();
+
+        /* 설명. 3. 병렬 처리용 reduce: 1개의 초기값, 1개의 누적용 람다식, 1개의 결합용 람다식 */
+        /* 설명. 세 번째로 전달된 람다식은 병렬 스트림 일때만 활용하는 cpu의 여러 코어로 계산한 결과를 결합 할 용도의 람다식이다. */
+        Integer reduceTreeParam = Stream.of(4,5,1,2,3,9,6,7,8,10)
+//                .parallel()                   // 주석을 통해 순차 스트림과ㅏ 병렬 스트림 모두 테스트 해 볼 수 있음.
+                .reduce(100,
+                        (a,b) -> {
+                            System.out.printf("%d, %d\n",a,b);
+                            return a+b;
+                        },
+                        (x,y) -> {
+                            System.out.printf("결합: %d, %d\n",x,y);
+                            return x+y;
+                        });
+        System.out.println("최종 결과: " + reduceTreeParam);
+
+        /* 설명.  */
+    }
+}

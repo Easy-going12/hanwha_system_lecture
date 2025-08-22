@@ -35,6 +35,6 @@ public class Application3 {
         List<Integer> descList2 = numbers.stream()
                                         .sorted(Comparator.reverseOrder()) // 기본 정렬 기준을 뒤집는 용도로 사용 가능
                                         .collect(Collectors.toList());
-        System.out.println("descList2 = " + descList2);
+        System.out.println("descList2 = " + descList2); // 존재하면 숫자로만 나오기도 함
     }
 }

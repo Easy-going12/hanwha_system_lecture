@@ -5,8 +5,16 @@ package com.ohgiraffers.section02.uses.subsection03.terminal;
  *     - 스트림의 요소들을 하나의 값으로 줄이는(reduce) 최종연산
  *     - 누적 연산을 통해 스트림의 모든 요소를 단일 결과로 결합
  *     - BinaryOperator 형태의 람다식 활용
+ *
+ * 설명.
+ *  reduce()의 3까지 형태
+ *   1. 1 param: Optional 변화나(빈 스트림 고려)
+ *   2. 2 param: 초기값 사용, 직접 값 변환
+ *   3. 3 param: 병렬 처리 가능
 * */
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.OptionalInt;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -48,6 +56,19 @@ public class Application2 {
                         });
         System.out.println("최종 결과: " + reduceTreeParam);
 
-        /* 설명.  */
+        /* 설명. 문자열 연결 */
+        List<String> words = Arrays.asList("Java", "Stream","API","reduce","method");
+        System.out.println("words = " + words);
+
+        /* 설명. 단순 연결 */
+        String simpleJoin = words.stream()
+                                .reduce("",(a,b) -> a+b);
+        System.out.println("simpleJoin = " + simpleJoin);
+
+        /* 설명. 구분자를 사용한 연결 */
+        String joinWithSeparator = words.stream()
+                                    .reduce("",(a,b) -> a.isEmpty()? b: a+ "|" + b);
+        System.out.println("joinWithSeparator = " + joinWithSeparator);
+
     }
 }

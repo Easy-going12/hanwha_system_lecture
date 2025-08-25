@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class JupiterAssertionsTest {
 
-    /* 수업 목표. Junit5에서 제공하는 Assertions 메소드에 댛해 이해하고 활용할 수 있다. */
+    /* 수업 목표. Junit5에서 제공하는 Assertions 메소드에 대해 이해하고 활용할 수 있다. */
     /* 설명. 1. assertEquals: 동등한지 비교해 주는 연산자로 참조 자료형끼리 비교할 경우에는 e,h를 오버라읻 할 것 */
     @Test
     public void testAssertEquals(){
@@ -77,10 +77,30 @@ public class JupiterAssertionsTest {
         // then
         Assertions.assertAll(
                 "그룹화된 테스트의 이름(테스트 실패 시 보여짐)",
-                () -> Assertions.assertEquals(firstName + "1", person.getFirstName(), ()-> "firstName이 잘못됨"),
+                () -> Assertions.assertEquals(firstName , person.getFirstName(), ()-> "firstName이 잘못됨"),
                 () -> Assertions.assertEquals(lastName, person.getLastName(), () -> "lastName이 잘못됨")
         );
     }
 
     /* 설명. 6. assertThrow*/
+    @Test
+    @DisplayName("void 메소드를 테스트하는 경우 어떤 exception이 발생했는지 테스트")
+    void testAsserThrows(){
+        int firstNum = 10;
+        int secondNum = 0;
+        String expectedMessage = "0으로 나눌 수 없습니다!";
+
+        NumberValidator validator = new NumberValidator();
+        Exception exception = Assertions.assertThrows(
+                Exception.class,
+                () -> validator.checkDividableNumbers(firstNum, secondNum)
+        );
+
+        Assertions.assertAll(
+                () -> Assertions.assertInstanceOf(IllegalArgumentException.class, exception,
+                        () -> "예외 타입이 일치하지 않음"),
+                () ->  Assertions.assertEquals(exception.getMessage(), exception.getMessage(),
+                        () -> "예외 메세지가 일치하지 않음")
+                );
+    }
 }

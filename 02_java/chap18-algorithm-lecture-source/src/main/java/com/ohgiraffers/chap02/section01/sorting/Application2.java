@@ -2,7 +2,8 @@ package com.ohgiraffers.chap02.section01.sorting;
 
 /* 설명.
  *   선택 정렬(Selection Sort)
- *
+ *     대상 데이터에서 최대나 최소를 찾아 맨 앞(맨 뒤)과 교환하는 방법이다.
+ *     시간복잡도는 역시(O(n^2))이라 효율적이지 않다.
 * */
 public class Application2 {
 

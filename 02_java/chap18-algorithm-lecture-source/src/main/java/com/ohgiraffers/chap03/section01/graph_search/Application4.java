@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-import static com.ohgiraffers.chap03.section01.graph_search.Application1.visit;
-
 public class Application4 {
 
     public static BufferedReader toBufferedReader(String str) {
@@ -14,8 +12,8 @@ public class Application4 {
         return new BufferedReader(new InputStreamReader(is));
     }
 
-    /* 설명. 양방향 그패르이면 1차원 배열로 방문배열을 작성할 수 있다. */
-    static boolean[] visist;
+    /* 설명. 양방향 그래프이면 1차원 배열로 방문배열을 작성할 수 있다. */
+    static boolean[] visit;
 
     static int[][] arr;
 
@@ -41,7 +39,7 @@ public class Application4 {
         arr = new int[node + 1][node + 1];
         visit = new boolean[node + 1];
 
-        for(int i = 0; i< line; i++){
+        for (int i = 0; i < line; i++) {
             StringTokenizer st2 = new StringTokenizer(br.readLine());
 
             int a = Integer.parseInt(st2.nextToken());
@@ -53,10 +51,12 @@ public class Application4 {
         dfs(start);
         sb.append("\n");
 
-        visit = new boolean[node + 1];     // dfs와 bfs모두 같은 방문배열을 사용하기 때문
+        visit = new boolean[node + 1];  // dfs와 bfs 모두 같은 방문배열을 사용하기 때문
         bfs(start);
 
-        return sb.toString();           // StringBuilder를 String으로 반환
+        System.out.println("현재까지 쌓인 내용: " + sb);
+
+        return sb.toString();       // StringBuilder를 String으로 변환
     }
 
     private static void dfs(int start) {
@@ -64,7 +64,7 @@ public class Application4 {
         sb.append(start + " ");
 
         for (int i = 1; i <= node ; i++) {
-            if(arr[start][i] == 1 && !visist[i]){
+            if(arr[start][i] == 1 && !visit[i]) {
                 dfs(i);
             }
         }
@@ -74,14 +74,14 @@ public class Application4 {
         que.offer(start);
         visit[start] = true;
 
-        while(!que.isEmpty()){
+        while(!que.isEmpty()) {
             start = que.poll();
             sb.append(start + " ");
 
-            for(int i = 0; i<= node; i++){
-                if(arr[start][i] == 1 && !visit[i]){
+            for (int i = 1; i <= node ; i++) {
+                if(arr[start][i] == 1 && !visit[i]) {
                     que.offer(i);
-                    visit[i] =true;
+                    visit[i] = true;
                 }
             }
         }

@@ -5,12 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Application2 {
+
     public static BufferedReader toBufferedReader(String str) {
         InputStream is = new ByteArrayInputStream(str.getBytes());
         return new BufferedReader(new InputStreamReader(is));
     }
 
-    protected static class Node{        // private를 안 썼는데 굳이 생성자를 사용해야하나?
+    static class Node {
         int left;
         int right;
 
@@ -31,11 +32,11 @@ public class Application2 {
 
         int n = Integer.parseInt(br.readLine());
         list = new ArrayList[n + 1];
-        for (int i = 0; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             list[i] = new ArrayList<>();
         }
 
-        for (int i = 0; i <= n ; i++) {
+        for (int i = 1; i <= n ; i++) {
             String[] alpha = br.readLine().split(" ");
 
             /* 설명. 각 알파벳을 숫자로 바꾸는 과정('A' -> 1, 'B' -> 2, ...) */
@@ -45,49 +46,49 @@ public class Application2 {
             list[data].add(new Node(left, right));
         }
 
-        /* 설명. 전위 -> 준위 -> 후위 */
+        /* 설명. 전위 -> 중위 -> 후위 */
         preorder(1);
         sb.append("\n");
         inorder(1);
         sb.append("\n");
         postorder(1);
 
-
-//        System.out.println(sb);
+        System.out.println(sb);
 
         return sb.toString();
     }
 
     private static void preorder(int start) {
-        for(Node node: list[start]){
+        for(Node node: list[start]) {
             int l = node.left;
             int r = node.right;
 
-            sb.append((char)(start + 'A' -1));
-            if((l + 'A' - 1) != '.')preorder(l);
-            if((r + 'A' - 1) != '.')preorder(r);
+            sb.append((char)(start + 'A' - 1));
+            if((l + 'A' - 1) != '.') preorder(l);
+            if((r + 'A' - 1) != '.') preorder(r);
         }
     }
 
     private static void inorder(int start) {
-        for(Node node: list[start]){
+        for(Node node: list[start]) {
             int l = node.left;
             int r = node.right;
 
-            if((l + 'A' - 1) != '.')inorder(l);
-            sb.append((char)(start + 'A' -1));
-            if((r + 'A' - 1) != '.')inorder(r);
+            if((l + 'A' - 1) != '.') inorder(l);
+            sb.append((char)(start + 'A' - 1));
+            if((r + 'A' - 1) != '.') inorder(r);
         }
     }
 
     private static void postorder(int start) {
-        for(Node node: list[start]){
+        for(Node node: list[start]) {
             int l = node.left;
             int r = node.right;
 
-            if((l + 'A' - 1) != '.')postorder(l);
-            if((r + 'A' - 1) != '.')postorder(r);
-            sb.append((char)(start + 'A' -1));
+            if((l + 'A' - 1) != '.') postorder(l);
+            if((r + 'A' - 1) != '.') postorder(r);
+            sb.append((char)(start + 'A' - 1));
         }
     }
+
 }

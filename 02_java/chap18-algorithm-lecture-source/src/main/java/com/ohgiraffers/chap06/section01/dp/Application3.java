@@ -18,7 +18,8 @@ public class Application3 {
         dp[1] = 1;
         dp[2] = 1;
 
-        dp[n] = padovan(n - 2, dp) + padovan(n - 3, dp);
+        /* 설명. 조건문을 통해 점화식을 적용하는 것은 필요할 때만 적용(가지치기) */
+        if(dp[n] == 0) dp[n] = padovan(n - 2, dp) + padovan(n - 3, dp);
 
         return dp[n];
     }

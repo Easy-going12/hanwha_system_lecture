@@ -11,11 +11,11 @@ import static com.ohgiraffers.common.JDBCTemplate.close;
 
 public class MenuRepository {
     public int insertMenu(Menu menu, Connection con) {
-        PreparedStatement pstmt = null;
+        PreparedStatement pstmt = null;     // 트럭 역할 그러니까 입력된 데이터를 넣는 공간
 
         int result = 0;
 
-        Properties prop = new Properties();
+        Properties prop = new Properties();     // 파일 위치 지정
         try {
             prop.loadFromXML(
                     new FileInputStream("src/main/java/com/ohgiraffers/section01/insert/menu-mapper.xml"));

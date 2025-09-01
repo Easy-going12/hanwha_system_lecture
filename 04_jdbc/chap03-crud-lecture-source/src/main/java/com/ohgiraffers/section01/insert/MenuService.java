@@ -10,7 +10,7 @@ import static com.ohgiraffers.common.JDBCTemplate.*;
         트랜잭션 처리(commit/rollback)를 담당 */
 public class MenuService {
     public void registMenu(Menu menu) {
-        Connection con = getConnection();
+        Connection con = getConnection();   // JDBC 역할 DB와 java를 연결해주는 역할
 
         MenuRepository repository = new MenuRepository();
         int result = repository.insertMenu(menu, con);

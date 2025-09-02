@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 
 import java.io.IOException;
 
-@WebServlet(value = "/annotation-lifecycle")
+@WebServlet(value = "/annotation-lifecycle", loadOnStartup = 2)
 public class LifeCycleTestServlet extends HttpServlet {
     public LifeCycleTestServlet() {
         System.out.println("annotation 방식 기본 생성자 실행!");

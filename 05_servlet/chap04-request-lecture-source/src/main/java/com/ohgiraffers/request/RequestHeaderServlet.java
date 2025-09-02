@@ -18,7 +18,7 @@ public class RequestHeaderServlet extends HttpServlet {
          *  요청 시 전달되는 헤더라는 것이 가진 정보는 전통적으로 4가지 카테고리로 구분된다.
          *
          * 설명.
-         *  1. General Header
+         *  1. Generale Headr
          *      : 요청 및 응답 모두에 적용되지만 최종적으로는 body에 전송되는 것과는 관련이 없는 헤더이다.
          *  2. Request Header
          *      : 패치 도리 리소스나 클라이언트 자체에 애한 상세 정보를 포함하는 헤더이다,

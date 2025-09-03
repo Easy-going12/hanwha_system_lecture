@@ -1,4 +1,4 @@
-package com.ohgiraffers.session;
+package com.ohgiraffers.session.section01;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

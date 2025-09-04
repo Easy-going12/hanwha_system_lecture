@@ -1,4 +1,4 @@
-package com.ohgiraffers.listener.setcion01.contextlistner;
+package com.ohgiraffers.listener.section01.contextlistner;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;

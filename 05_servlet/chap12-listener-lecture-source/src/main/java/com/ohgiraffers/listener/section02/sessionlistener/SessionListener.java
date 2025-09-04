@@ -1,10 +1,12 @@
 package com.ohgiraffers.listener.section02.sessionlistener;
 
+import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.HttpSessionAttributeListener;
 import jakarta.servlet.http.HttpSessionBindingEvent;
 import jakarta.servlet.http.HttpSessionEvent;
 import jakarta.servlet.http.HttpSessionListener;
 
+@WebListener
 public class SessionListener implements HttpSessionListener, HttpSessionAttributeListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {

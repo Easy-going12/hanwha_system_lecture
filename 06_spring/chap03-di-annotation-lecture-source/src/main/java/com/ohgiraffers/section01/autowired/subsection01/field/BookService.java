@@ -15,7 +15,7 @@ public class BookService {
      *  필드에 @Autowired를 추가하면 필드를 통한 의존성 객체 주입(bean 주입)으로 필드 주입이라고 한다.
      * */
     @Autowired
-//    private BookDAO bookDAO = new BookDAOImpl();
+//    private BookDAO bookDAO = new BookDAOImpl(); -> 리플레션 기술
     private BookDAO bookDAO;
 
     public List<BookDTO> findAllBook() {

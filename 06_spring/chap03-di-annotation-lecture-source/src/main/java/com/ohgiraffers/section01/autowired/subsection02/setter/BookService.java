@@ -1,21 +1,14 @@
-package com.ohgiraffers.section01.autowired.subsection01.field;
+package com.ohgiraffers.section01.autowired.subsection02.setter;
 
 import com.ohgiraffers.section01.common.BookDAO;
-import com.ohgiraffers.section01.common.BookDAOImpl;
 import com.ohgiraffers.section01.common.BookDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+// field에 있는 BookService와 이름이 겹치지기 때문에 이름을 변경해야한다,
+@Service("setterService")
 public class BookService {
-
-    /* 설명.
-     *  필드에 @Autowired를 추가하면 필드를 통한 의존성 객체 주입(bean 주입)으로 필드 주입이라고 한다.
-     * */
-    @Autowired
-//    private BookDAO bookDAO = new BookDAOImpl();
     private BookDAO bookDAO;
 
     public List<BookDTO> findAllBook() {
@@ -25,4 +18,5 @@ public class BookService {
     public BookDTO findBookBySequenceOf(int sequence) {
         return bookDAO.findBookBySequenceOf(sequence);
     }
+
 }

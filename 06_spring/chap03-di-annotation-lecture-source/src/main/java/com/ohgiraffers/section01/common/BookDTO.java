@@ -12,5 +12,6 @@ public class BookDTO {
     private int isbn;
     private String title;
     private String author;
+    private String publisher;
     private java.util.Date createdDate;
 }

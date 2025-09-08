@@ -14,7 +14,6 @@ public class MemberService {
         this.memberDAO = memberDAO;
     }
 
-
     public List<MemberDTO> findAllMembers() {
         System.out.println("target -> findAllMembers 실행");
         return memberDAO.selectAllMembers();

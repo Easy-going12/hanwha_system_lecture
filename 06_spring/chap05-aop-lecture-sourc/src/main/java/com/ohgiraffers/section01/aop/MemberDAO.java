@@ -16,7 +16,6 @@ public class MemberDAO {
         memberList.add(new MemberDTO(2L, "홍길동"));
     }
 
-
     public List<MemberDTO> selectAllMembers() {
         return memberList;
     }

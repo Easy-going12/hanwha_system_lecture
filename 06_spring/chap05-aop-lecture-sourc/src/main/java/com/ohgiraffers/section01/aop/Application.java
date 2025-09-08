@@ -3,7 +3,6 @@ package com.ohgiraffers.section01.aop;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.sql.SQLOutput;
 
 public class Application {
     public static void main(String[] args) {
@@ -17,5 +16,10 @@ public class Application {
 
         System.out.println("===== 회원 한명 조회 =====");
         System.out.println(memberService.findMemberBy(1));
+
+        /* 설명. AfterThrowing Advice 확인용 요청 */
+//        System.out.println(memberService.findMemberBy(3));  // after returning에서 추가된
+//                                                                 // MemberDTO 객체가 있어 2가 안되고 3으로 테스트
+
     }
 }

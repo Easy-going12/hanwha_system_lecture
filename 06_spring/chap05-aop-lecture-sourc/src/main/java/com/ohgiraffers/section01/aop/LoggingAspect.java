@@ -39,57 +39,57 @@ public class LoggingAspect {
 
     /* 설명. 포인트 컷을 따로 메소드로 빼내는 작업 */
     @Pointcut("execution(* com.ohgiraffers.section01.aop.*Service.*(..))")
-    public void loginAspect() {
+    public void loggingAspect() {
     }
 
     /* 설명. 1. Before Advice */
 //    @Before("execution(* com.ohgiraffers.section01.aop.*Service.*(..))")
-    @Before("LoggingAspect.loggingAspect()")      // 포인트 컷을 할 부분 지정 간략하게 표현
+    @Before("LoggingAspect.loggingAspect()")
     public void logBefore(JoinPoint joinPoint) {
         System.out.println("Before Advice 동작");
         System.out.println("Before joinPoint.getTarget(): " + joinPoint.getTarget());
         System.out.println("Before joinPoint.getSignature(): " + joinPoint.getSignature());
-        if(joinPoint.getArgs().length >0){      // 매개변수가 있다면
-            System.out.println("Before joinPoint.getArgs()[0]:" + joinPoint.getArgs()[0]);
+        if(joinPoint.getArgs().length > 0) {        // 매개변수가 있다면
+            System.out.println("Before joinPoint.getArgs()[0]: " + joinPoint.getArgs()[0]);
         }
     }
 
     /* 설명. 2. After Advice */
-    @After("LogginAspect.loggingAspect()")
+    @After("LoggingAspect.loggingAspect()")
     public void logAfter(JoinPoint joinPoint) {
         System.out.println("After Advice 동작");
-        System.out.println("After joinPoint,getTarget():" + joinPoint.getTarget());
-        System.out.println("After joinPoint.getSignature():" + joinPoint.getSignature());
-        if(joinPoint.getArgs().length >0){
-            System.out.println("After joinPoint.getArgs()[0]:" + joinPoint.getArgs()[0]);
+        System.out.println("After joinPoint.getTarget(): " + joinPoint.getTarget());
+        System.out.println("After joinPoint.getSignature(): " + joinPoint.getSignature());
+        if(joinPoint.getArgs().length > 0) {
+            System.out.println("After joinPoint.getArgs()[0]: " + joinPoint.getArgs()[0]);
         }
     }
 
     /* 설명. 3. AfterReturning Advice */
-    @AfterReturning(pointcut = "loggingAspect()", returning="result")
-    // pointcut은 같은 클래스의
-    public void longAfterReturning(JoinPoint joinPoint, Object result) {
+    @AfterReturning(pointcut= "loggingAspect()", returning="result")     // pointcut은 같은 클래스의
+    // 메소드면 클래스명 생략 가능
+    public void logAfterReturning(JoinPoint joinPoint, Object result) {
         System.out.println("After Returning result: " + result);
 
-        if(result != null && result instanceof List){
-            ((List<MemberDTO>)result).add((new MemberDTO(3L,"반환 값 가공")));
+        if(result != null && result instanceof List) {
+            ((List<MemberDTO>)result).add(new MemberDTO(3L, "반환 값 가공"));
         }
     }
 
     /* 설명. 4. AfterThrowing Advice */
-    @AfterThrowing(pointcut="loggingAspect()", throwing = "exception")
-    public void longAfterThrowing(Throwable exception) {
-        System.out.println("After Throwing exception: " + exception);
+    @AfterThrowing(pointcut="loggingAspect()", throwing = "excpetion")
+    public void logAfterThrowing(Throwable excpetion) {
+        System.out.println("After Throwing exception: " + excpetion);
     }
 
     /* 설명. 5. Around Advice */
     /* 설명.
-     *  이 어드바이스는 타켓 메소드를 완전히 장악하기 때문에 앞서 살펴 본 어드바이스 모두
+     *  이 어드바이스는 타겟 메소드를 완전히 장악하기 때문에 앞서 살펴 본 어드바이스 모두
      *  Around Advice 하나로 대체가 가능하다.
-     *  타켓 메소드를 언제 실행할지, 아니면 아예 실행을 안할지 여부도 제어한다.(feat. 필터와 유사)
-     *  하지만 타켓 메소드를 실행하는 proceed() 메소드를 잊는 경우가 자주 발생하기 대문에 사용 시
+     *  타겟 메소드를 언제 실행할지, 아니면 아예 실행을 안할지 여부도 제어한다.(feat. 필터와 유사)
+     *  하지만 타겟 메소드를 실행하는 proceed() 메소드를 잊는 경우가 자주 발생하기 때문에 사용 시
      *  주의해야 하며 가능한 최소한의 요건을 충족하면서도 가장 약한 어드바이스를 쓰는 것이 바람직하다.
-    * */
+     * */
     @Around("loggingAspect()")
     public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         System.out.println("Around Before");
@@ -97,6 +97,6 @@ public class LoggingAspect {
         Object result = joinPoint.proceed();
 
         System.out.println("Around After");
-        return null;
+        return result;
     }
 }

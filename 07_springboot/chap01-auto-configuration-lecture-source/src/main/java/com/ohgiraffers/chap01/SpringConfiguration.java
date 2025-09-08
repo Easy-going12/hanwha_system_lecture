@@ -1,13 +1,11 @@
 package com.ohgiraffers.chap01;
 
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SpringConfiguration {
-
     @Value("${test.value}")
     public String testValue;
 
@@ -19,12 +17,11 @@ public class SpringConfiguration {
     public String userName;
 
     @Bean
-    public Object propertyReadTest(){
+    public Object propertyReadTest() {
         System.out.println("testValue = " + testValue);
         System.out.println("testAge = " + testAge);
         System.out.println("userName = " + userName);
 
         return new Object();
     }
-
 }

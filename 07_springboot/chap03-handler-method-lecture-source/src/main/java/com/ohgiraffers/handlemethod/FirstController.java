@@ -3,10 +3,7 @@ package com.ohgiraffers.handlemethod;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -84,9 +81,20 @@ public class FirstController {
     @GetMapping("search")
     public void search(){}
 
+    /* 설명.
+     *  핸들러 메소드에 우리가 작성한 클래스(bean X)를 매개변수로 작성하면 스프링이 기본 생성자를 활용해서
+     *  객체를 만들어 주고 setter로 값도 주입해 준다, 이러한 클래스의 객체를 '커맨드 객체'라고 부른다.
+     *
+     * 설명.
+     *  @ModelAttribute 이노테이션을 활용하면 커맨드 객체를 모델의 attribute에 바로 담아주며 이후
+     *  view의 재료로 사용할 수 있다.(name 속성 작성 유무에 따라 화면에서 활용하는 방법이 다르다.)
+    * */
     @PostMapping("search")
-    public String searchMenu(){
+    public String searchMenu(@ModelAttribute(name="menu") MenuDTO menu){
+        // menu가 커맨드 객체이다. 콩이 아니므로 새로 생성될 때마다 값이 초기화 된다.
 
-        return "first/messagePrinter";
+        System.out.println("menu = " + menu);
+
+        return "first/searchResult";
     }
 }

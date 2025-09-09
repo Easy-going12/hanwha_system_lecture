@@ -4,7 +4,7 @@ import lombok.*;
 
 @NoArgsConstructor      // 스프링이 사용 할 생성자
 @AllArgsConstructor
-@Getter
+@Getter                 // 타임리프에서 값을 꺼낼올 때 사용된다.
 @Setter                 // 스프링이 사용 할 setter
 @ToString
 

@@ -43,7 +43,7 @@ public class FirstController {
         return "first/messagePrinter";
     }
 
-    // 왜 굳이 GetMapping을 한 다음 PostMapping을 햇을까? => get에서 조회, 인식을 하고 Post에서 값의 수정이 이루어지기 때문
+    // 왜 굳이 GetMapping을 한 다음 PostMapping을 햇을까? => get에서 조회, 인식을 하고 Post에서 값의 수정이 이루어지기 떄문
     @GetMapping("modify")
     public void modify(){}
 

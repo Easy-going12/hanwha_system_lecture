@@ -9,13 +9,14 @@ import java.util.Properties;
 @Configuration
 public class ContextConfiguration {
 
+    // main.html 시작하기 전에 미리 설정되어 있는 부분들
     @Bean
     public SimpleMappingExceptionResolver simpleMappingExceptionResolver(){
         SimpleMappingExceptionResolver exceptionResolver = new SimpleMappingExceptionResolver();
 
         /* 설명. 예외 타입과 예외를 처리 할 페이지 설정 */
         Properties props = new  Properties();
-        props.setProperty("java.langNullPointerException", "error/nullPointer");
+        props.setProperty("java.lang.NullPointerException", "error/nullPointer");
         props.setProperty("MemberRegistException","error/memberRegist");
 
         /* 설명. 전체 예외 관련되어 설정하기 */

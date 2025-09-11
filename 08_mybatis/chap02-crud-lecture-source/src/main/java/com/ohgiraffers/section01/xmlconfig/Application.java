@@ -1,4 +1,4 @@
-package com.ohgiaffers.section01.xmlconfig;
+package com.ohgiraffers.section01.xmlconfig;
 
 import java.util.Scanner;
 

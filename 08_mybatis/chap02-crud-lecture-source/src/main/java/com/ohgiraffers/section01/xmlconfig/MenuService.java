@@ -1,10 +1,10 @@
-package com.ohgiaffers.section01.xmlconfig;
+package com.ohgiraffers.section01.xmlconfig;
 
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-import static com.ohgiaffers.section01.xmlconfig.Template.getSqlSession;
+import static com.ohgiraffers.section01.xmlconfig.Template.getSqlSession;
 
 public class MenuService {
 

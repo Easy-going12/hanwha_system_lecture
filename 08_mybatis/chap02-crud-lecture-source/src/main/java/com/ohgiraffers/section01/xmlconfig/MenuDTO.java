@@ -1,21 +1,21 @@
-package com.ohgiaffers.section01.xmlconfig;
+package com.ohgiraffers.section01.xmlconfig;
 
 public class MenuDTO {
     private int menuCode;
     private String menuName;
     private int menuPrice;
     private int categoryCode;
-    private String orderabelStatus;
+    private String orderableStatus;
 
     public MenuDTO() {
     }
 
-    public MenuDTO(int categoryCode, int menuCode, String menuName, int menuPrice, String orderabelStatus) {
+    public MenuDTO(int categoryCode, int menuCode, String menuName, int menuPrice, String orderableStatus) {
         this.categoryCode = categoryCode;
         this.menuCode = menuCode;
         this.menuName = menuName;
         this.menuPrice = menuPrice;
-        this.orderabelStatus = orderabelStatus;
+        this.orderableStatus = orderableStatus;
     }
 
     public int getCategoryCode() {
@@ -50,12 +50,12 @@ public class MenuDTO {
         this.menuPrice = menuPrice;
     }
 
-    public String getOrderabelStatus() {
-        return orderabelStatus;
+    public String getOrderableStatus() {
+        return orderableStatus;
     }
 
-    public void setOrderabelStatus(String orderabelStatus) {
-        this.orderabelStatus = orderabelStatus;
+    public void setOrderableStatus(String orderableStatus) {
+        this.orderableStatus = orderableStatus;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class MenuDTO {
                 ", menuCode=" + menuCode +
                 ", menuName='" + menuName + '\'' +
                 ", menuPrice=" + menuPrice +
-                ", orderabelStatus='" + orderabelStatus + '\'' +
+                ", orderabelStatus='" + orderableStatus + '\'' +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.ohgiaffers.section01.xmlconfig;
+package com.ohgiraffers.section01.xmlconfig;
 
 /* 설명. SqlSession 개겣를 반환하는 Mybatis 관련 코드 모듈(모듈화) */
 import org.apache.ibatis.io.Resources;
@@ -15,10 +15,10 @@ public class Template {
     /* 설명. Lazy Singleton 방식으로 작성 */
     public static SqlSession getSqlSession(){
         if(sqlSessionFactory == null){
-            String resource = "com/ohgiaffers/section01/xmlconfig/mybatis-config.xml";
+            String resources = "com/ohgiraffers/section01/xmlconfig/mybatis-config.xml";
 
             try {
-                InputStream inputStream = Resources.getResourceAsStream(resource);
+                InputStream inputStream = Resources.getResourceAsStream(resources);
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             } catch (IOException e) {
                 throw new RuntimeException(e);

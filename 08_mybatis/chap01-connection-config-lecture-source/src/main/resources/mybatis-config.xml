@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- DB에 맞는 환경 설정 -->
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/> <!-- JDBC: 수동 commit -->
+            <dataSource type="POOLED">  <!-- connection pool 활용(추후 스프링에서 hikari cp 사용) -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/menudb"/>
+                <property name="username" value="swcamp"/>
+                <property name="password" value="swcamp"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!-- mapper.xml에 등록한 쿼리문을 인식한다. -->
+        <mapper resource="mapper.xml"/>
+    </mappers>
+</configuration>

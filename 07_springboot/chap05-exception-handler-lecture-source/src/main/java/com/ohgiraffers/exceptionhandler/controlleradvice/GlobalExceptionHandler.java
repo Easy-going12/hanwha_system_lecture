@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 // 왜 예외를 받는 부분을 controller하고 handler를 나눴는지 의문이다???
-// 모든 controller에서 발생하는 오류들을 한꺼번에 묶었다.
+// 모든 controller에서 발생하는 오류들을 처리하는 역할
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(GlobalException.class)

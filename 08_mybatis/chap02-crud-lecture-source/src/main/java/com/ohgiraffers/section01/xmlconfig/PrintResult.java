@@ -12,7 +12,19 @@ public class PrintResult {
         System.out.println("에러 메세지: " + message);
     }
 
+    /* 설명. 메뉴 상세 보기 페이지 느낌 */
     public void printMenu(MenuDTO menu) {
         System.out.println("menu = " + menu);
+    }
+
+    /* 설명. 메뉴 DML 작업 성공 페이지 느낌 */
+    public void printSuccessMessage(String message) {
+        String successMessage = "";
+        switch(message){
+            case "regist": successMessage = "신규 메뉴 등록에 성공하셨습니다!"; break;
+            case "modify": successMessage = "메뉴 수정에 성공하셨습니다."; break;
+            case "remove": successMessage = "메뉴 삭제에 성공하셨습니다.";
+        }
+        System.out.println("DML 성공 메세지: " +  successMessage);
     }
 }

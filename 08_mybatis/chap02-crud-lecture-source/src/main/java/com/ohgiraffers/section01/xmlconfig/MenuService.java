@@ -22,10 +22,59 @@ public class MenuService {
         return menuList;
     }
 
-    public MenuDTO findMenubyMenuCode(int menuCode) {
+    public MenuDTO findMenuByMenuCode(int menuCode) {
         SqlSession sqlSession = getSqlSession();
-        MenuDTO menu = menuDAO.selectMenubyMenuCode(sqlSession, menuCode);
+        MenuDTO menu = menuDAO.selectMenuByMenuCode(sqlSession, menuCode);
         sqlSession.close();
-        return null;
+        return menu;
+    }
+
+    public boolean registMenu(MenuDTO menu) {
+        SqlSession sqlSession = getSqlSession();
+
+        int result = menuDAO.insertMenu(sqlSession, menu);
+
+        if(result == 1){
+            sqlSession.commit();
+        } else{
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result == 1? true:false;
+    }
+
+    public boolean modifyMenu(MenuDTO menu) {
+        SqlSession sqlSession = getSqlSession();
+
+        int result = menuDAO.updateMenu(sqlSession, menu);
+
+        if(result == 1){
+            sqlSession.commit();
+        } else{
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result == 1? true:false;
+
+    }
+
+    public boolean removeMenu(int menuCode) {
+        SqlSession sqlSession = getSqlSession();
+
+        int result = menuDAO.deleteMenu(sqlSession, menuCode);
+
+        if(result == 1){
+            sqlSession.commit();
+        } else{
+            sqlSession.rollback();
+        }
+
+        sqlSession.close();
+
+        return result == 1? true:false;
     }
 }

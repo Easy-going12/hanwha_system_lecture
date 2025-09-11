@@ -11,4 +11,8 @@ public class PrintResult {
     public void printErrorMessage(String message) {
         System.out.println("에러 메세지: " + message);
     }
+
+    public void printMenu(MenuDTO menu) {
+        System.out.println("menu = " + menu);
+    }
 }

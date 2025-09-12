@@ -54,6 +54,9 @@ public class Application {
                 case 1:
                     ms.searchMenuByCodeOrSearchAll(inputAllOrOne());
                     break;
+                case 2:
+                    ms.searchMenuByNameOrCategory(inputSearchCriteriaMap());
+                    break;
                 case 9:
                     return;
             }
@@ -147,6 +150,7 @@ public class Application {
 
 
     /* 설명. 검색을 위해 필요한 내용만을 가지는 SearchCriteria를 반환하는 메소드 */
+
     private static SearchCriteria inputSearchCriteria() {
         Scanner sc = new Scanner(System.in);
         System.out.print("검색 기준을 입력해 주세요(name or category): ");
@@ -157,7 +161,6 @@ public class Application {
 
         return new SearchCriteria(condition, value);
     }
-
     private static SearchCriteria inputSupCategory() {
         Scanner sc = new Scanner(System.in);
         System.out.print("메뉴의 상위 분류를 입력해 주세요(식사, 음료, 디저트): ");
@@ -165,6 +168,7 @@ public class Application {
 
         return new SearchCriteria("category", value);
     }
+
     private static List<Integer> generateRandomMenuCodeList() {
         Set<Integer> set = new HashSet<>();
         while(set.size() <5){
@@ -176,5 +180,36 @@ public class Application {
 //        Collections.sort(list);                   // 오름차순 정렬 필요 시
         System.out.println("생성된 난수: " + list);
         return list;
+    }
+
+    private static Map<String, Object> inputSearchCriteriaMap() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("검색 조건을 입력하세요(category or name or both or none): ");
+        String condition = sc.nextLine();
+
+        Map<String, Object> criteria = new HashMap<>();
+        if("category".equals(condition)){
+            System.out.print("검색 할 카테고리 코드를 입력하세요: ");
+            int categoryCode = sc.nextInt();
+
+            criteria.put("categoryCode", categoryCode);
+        } else if("name".equals(condition)){
+            System.out.print("검색 할 메뉴 이름을 입력하세요: ");
+            String nameValue = sc.nextLine();
+
+            criteria.put("name", nameValue);
+        } else if("both".equals(condition)){
+            System.out.print("검색 할 카테고리 코드를 입력하세요: ");
+            int categoryCode = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("검색 할 메뉴 이름을 입력하세요: ");
+            String nameValue = sc.nextLine();
+
+            criteria.put("categoryCode", categoryCode);
+            criteria.put("name", nameValue);
+        }
+        return criteria;
     }
 }

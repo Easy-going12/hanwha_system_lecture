@@ -3,6 +3,7 @@ package com.ohgiraffers.dynamic;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.ohgiraffers.dynamic.Template.getSqlSession;
 
@@ -65,5 +66,16 @@ public class MenuService {
 
         sqlSession.close();
 
+    }
+
+    public void searchMenuByNameOrCategory(Map<String, Object> criteria) {
+        SqlSession sqlSession = getSqlSession();
+        MenuMapper mapper =
+                sqlSession.getMapper(MenuMapper.class);
+
+        List<MenuDTO> menus = mapper.searchMenuByNameOrCategory(criteria);
+        menus.forEach(System.out::println);
+
+        sqlSession.close();
     }
 }

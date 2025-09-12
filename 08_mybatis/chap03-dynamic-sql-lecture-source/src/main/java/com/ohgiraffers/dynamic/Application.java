@@ -12,7 +12,7 @@ public class Application {
             System.out.println("3. foreach 확인하기");
             System.out.println("4. trim(where, set) 확인하기");
             System.out.println("9. 종료하기");
-            System.out.print("메뉴를 선택하세요");
+            System.out.print("메뉴를 선택하세요: ");
             int input  = sc.nextInt();
             switch (input){
                 case 1:

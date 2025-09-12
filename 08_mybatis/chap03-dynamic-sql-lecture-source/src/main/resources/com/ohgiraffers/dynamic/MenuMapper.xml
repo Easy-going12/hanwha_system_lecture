@@ -90,4 +90,30 @@
             </when>
         </choose>
     </select>
+    <select id="searchMenuByRandomMenuCode" parameterType="list" resultMap="menuResultMap">
+        SELECT
+                A.MENU_CODE
+                , A.MENU_NAME
+                , A.MENU_PRICE
+                , A.CATEGORY_CODE
+                , A.ORDERABLE_STATUS
+        FROM TBL_MENU A
+        WHERE A.MENU_CODE IN
+        <foreach collection="list" item="menuCode" open="(" close=")" separator=", ">
+            #{menuCode}
+        </foreach>
+    </select>
+    <select id="searchMenuByCodeOrSearchAll" parameterType="com.ohgiraffers.dynamic.SearchCriteria"
+            resultMap="menuResultMap">
+        SELECT
+                A.MENU_CODE
+                , A.MENU_NAME
+                , A.MENU_PRICE
+                , A.CATEGORY_CODE
+                , A.ORDERABLE_STATUS
+          FROM TBL_MENU A
+        <if test="condition != null and condition == menuCode">
+            WHERE A.MENU_CODE = ${value}
+        </if>
+    </select>
 </mapper>

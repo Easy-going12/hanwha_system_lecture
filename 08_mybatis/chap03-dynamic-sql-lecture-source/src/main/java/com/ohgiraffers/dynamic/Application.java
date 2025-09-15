@@ -57,6 +57,8 @@ public class Application {
                 case 2:
                     ms.searchMenuByNameOrCategory(inputSearchCriteriaMap());
                     break;
+                case 3:
+                    ms.modifyMenu(inputChangeInfo());
                 case 9:
                     return;
             }
@@ -148,9 +150,7 @@ public class Application {
         return sc.nextInt();
     }
 
-
     /* 설명. 검색을 위해 필요한 내용만을 가지는 SearchCriteria를 반환하는 메소드 */
-
     private static SearchCriteria inputSearchCriteria() {
         Scanner sc = new Scanner(System.in);
         System.out.print("검색 기준을 입력해 주세요(name or category): ");
@@ -161,6 +161,7 @@ public class Application {
 
         return new SearchCriteria(condition, value);
     }
+
     private static SearchCriteria inputSupCategory() {
         Scanner sc = new Scanner(System.in);
         System.out.print("메뉴의 상위 분류를 입력해 주세요(식사, 음료, 디저트): ");
@@ -168,7 +169,6 @@ public class Application {
 
         return new SearchCriteria("category", value);
     }
-
     private static List<Integer> generateRandomMenuCodeList() {
         Set<Integer> set = new HashSet<>();
         while(set.size() <5){
@@ -211,5 +211,24 @@ public class Application {
             criteria.put("name", nameValue);
         }
         return criteria;
+    }
+
+    private static Map<String, Object> inputChangeInfo() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("변경할 메뉴 코드를 입력하세요: ");
+        int menuCode = sc.nextInt();
+        System.out.print("변경할 메뉴 이름을 입력하세요: ");
+        sc.nextLine();
+        String menuName = sc.nextLine();
+        System.out.print("변경할 판매 여부를 결쟁해 주세요(Y/N): ");
+        String orderableStatus = sc.nextLine().toUpperCase();
+
+        Map<String, Object> critMap = new HashMap<>();
+        critMap.put("menuCode", menuCode);
+        critMap.put("menuName", menuName);
+        critMap.put("orderableStatus", orderableStatus);
+
+        return critMap;
     }
 }

@@ -78,4 +78,21 @@ public class MenuService {
 
         sqlSession.close();
     }
+
+    public void modifyMenu(Map<String, Object> critMap) {
+        SqlSession sqlSession = getSqlSession();
+        MenuMapper mapper = sqlSession.getMapper(MenuMapper.class);
+
+        int result = mapper.updateMenu(critMap);
+
+        if(result == 1){
+            System.out.println("메뉴 정보 변경에 성공하였습니다.");
+            sqlSession.close();
+        }  else{
+            System.out.println("메뉴 정보 변경에 실패하였습니다");
+            sqlSession.close();
+        }
+
+        sqlSession.close();
+    }
 }

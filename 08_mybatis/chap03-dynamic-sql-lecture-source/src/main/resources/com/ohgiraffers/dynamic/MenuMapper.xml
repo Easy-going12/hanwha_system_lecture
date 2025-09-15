@@ -134,14 +134,43 @@
                 , A.CATEGORY_CODE
                 , A.ORDERABLE_STATUS
           FROM TBL_MENU A
-        <where>
-            <if test="name != null ">
-        A.MENU_NAME LIKE CONCAT('%',#{name}, '%')
+<!--        <where>-->
+<!--            <if test="name != null ">-->
+<!--        A.MENU_NAME LIKE CONCAT('%',#{name}, '%')-->
+<!--            </if>-->
+<!--            <if test="categoryCode != null">-->
+<!--        AND A.CATEGORY_CODE = #{categoryCode}-->
+<!--            </if>-->
+<!--        </where>-->
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="name != null">
+                A.MENU_NAME LIKE CONCAT('%',#{name}, '%')
             </if>
             <if test="categoryCode != null">
-        AND A.CATEGORY_CODE = #{categoryCode}
+                AND A.CATEGORY_CODE = #{categoryCode}
             </if>
-        </where>
-
+        </trim>
     </select>
+
+    <update id="updateMenu" parameterType="hashmap">
+        UPDATE
+                TBL_MENU
+<!--           <set>-->
+<!--               <if test="menuName != null and menuName != ''">-->
+
+<!--               </if>-->
+<!--               <if test="orderableStatus != null and orderableStatus != ''">-->
+<!--                   , ORDERABLE_STATUS = #{orderableStatus}-->
+<!--               </if>-->
+<!--           </set>-->
+        <trim prefix="SET" prefixOverrides=",">
+            <if test="menuName != null and menuName != ''">
+
+            </if>
+            <if test="orderableStatus != null and orderableStatus != ''">
+                , ORDERABLE_STATUS = #{orderableStatus}
+            </if>
+        </trim>
+           WHERE MENU_CODE = #{menuCODE}
+    </update>
 </mapper>

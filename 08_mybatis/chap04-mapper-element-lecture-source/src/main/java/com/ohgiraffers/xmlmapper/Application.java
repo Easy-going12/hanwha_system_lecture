@@ -22,7 +22,8 @@ public class Application {
                     es.selectResultMapAssociationTest();
                     break;
                 case 3:
-                    return;
+                    es.selectResultMapCollectionTest();
+                    break;
             }
         } while(true);
     }

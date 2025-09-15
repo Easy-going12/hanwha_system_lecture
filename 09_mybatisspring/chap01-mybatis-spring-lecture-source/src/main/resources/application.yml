@@ -3,4 +3,4 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     jdbc-url: jdbc:mariadb://localhost:3306/menudb
     username: swcamp
-    passward: swcamp
+    password: swcamp

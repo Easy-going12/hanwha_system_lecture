@@ -8,21 +8,63 @@
         <result property="menuName" column="MENU_NAME"/>
         <result property="menuPrice" column="MENU_PRICE"/>
         <result property="categoryCode" column="CATEGORY_CODE"/>
-        <result property="orderableStatus" column="ORDERABLE_STATUS"/>
     </resultMap>
     <resultMap id="menuResultMap2" type="com.ohgiraffers.xmlmapper.MenuDTO" extends="menuResultMap">
         <result property="orderableStatus" column="ORDERABLE_STATUS"/>
     </resultMap>
     <select id="selectResultMapTest" resultMap="menuResultMap2">
         SELECT
-                  A.MENU_CODE
-                , A.MENU_NAME
-                , A.MENU_PRICE
-                , A.CATEGORY_CODE
-                , A.ORDERABLE_STATUS
-          FROM TBL_MENU A
-         WHERE ORDERABLE_STATUS = 'Y'
+        A.MENU_CODE
+        , A.MENU_NAME
+        , A.MENU_PRICE
+        , A.CATEGORY_CODE
+        , A.ORDERABLE_STATUS
+        FROM TBL_MENU A
+        WHERE ORDERABLE_STATUS = 'Y'
+    </select>
 
+    <!-- 1. Association 관계에서 resultMap 2개 활용 -->
+<!--    <resultMap id="menuAndCategoryResultMap"-->
+<!--               type="com.ohgiraffers.xmlmapper.MenuAndCategoryDTO">-->
+<!--        <id property="menuCode" column="MENU_CODE"/>-->
+<!--        <result property="menuName" column="MENU_NAME"/>-->
+<!--        <result property="menuPrice" column="MENU_PRICE"/>-->
+<!--&lt;!&ndash;        <result  property="categoryCode" column="CATEGORY_CODE"/>&ndash;&gt;-->
+<!--        <result property="orderableStatus" column="ORDERABLE_STATUS"/>-->
+<!--        <association property="categoryCode" resultMap="categoryResultMap"/>-->
+<!--    </resultMap>-->
+<!--    <resultMap id="categoryResultMap"-->
+<!--               type="com.ohgiraffers.xmlmapper.CategoryDTO">-->
+<!--        <id property="categoryCode" column="CATEGORY_CODE"/>-->
+<!--        <result property="categoryName" column="CATEGORY_NAME"/>-->
+<!--        <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>-->
+<!--    </resultMap>-->
+
+    <!-- 2. Association 관계에서 resultMap 1개 활용 -->
+    <resultMap id="menuAndCategoryResultMap"
+               type="com.ohgiraffers.xmlmapper.MenuAndCategoryDTO">
+        <id property="menuCode" column="MENU_CODE"/>
+        <result property="menuName" column="MENU_NAME"/>
+        <result property="menuPrice" column="MENU_PRICE"/>
+        <result property="orderableStatus" column="ORDERABLE_STATUS"/>
+        <association property="categoryCode" javaType="com.ohgiraffers.xmlmapper.CategoryDTO">
+            <id property="categoryCode" column="CATEGORY_CODE"/>
+            <result property="categoryName" column="CATEGORY_NAME"/>
+            <result property="refCategoryCode" column="REF_CATEGORY_CODE"/>
+        </association>
+    </resultMap>
+    <select id="selectResultMapAssociationTest" resultMap="menuAndCategoryResultMap">
+        SELECT
+        A.MENU_CODE
+        , A.MENU_NAME
+        , A.MENU_PRICE
+        , A.CATEGORY_CODE
+        , B.CATEGORY_NAME
+        , B.REF_CATEGORY_CODE
+        , A.ORDERABLE_STATUS
+        FROM TBL_MENU A
+        JOIN TBL_CATEGORY B ON (A.CATEGORY_CODE = B.CATEGORY_CODE)
+        WHERE A.ORDERABLE_STATUS = 'Y'
     </select>
 
 </mapper>

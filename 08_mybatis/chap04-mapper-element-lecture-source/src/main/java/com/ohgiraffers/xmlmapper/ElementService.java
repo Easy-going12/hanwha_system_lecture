@@ -16,4 +16,17 @@ public class ElementService {
 
         sqlSession.close();
     }
+
+    public void selectResultMapAssociationTest() {
+        SqlSession sqlSession = getSqlSession();
+        ElementMapper mapper = sqlSession.getMapper(ElementMapper.class);
+
+        List<MenuAndCategoryDTO> menus = mapper.selectResultMapAssociationTest();
+        menus.forEach(System.out::println);
+
+        System.out.println("첫 번째 메뉴의 카테고리 이름 조회: "
+                + menus.get(0).getCategoryCode().getCategoryName());
+
+        sqlSession.close();
+    }
 }

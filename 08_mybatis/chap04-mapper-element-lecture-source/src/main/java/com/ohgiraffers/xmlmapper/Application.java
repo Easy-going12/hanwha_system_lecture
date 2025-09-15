@@ -17,11 +17,12 @@ public class Application {
             switch (num) {
                 case 1:
                     es.selectResultMapTest();
-
                     break;
-                case 2: break;
+                case 2:
+                    es.selectResultMapAssociationTest();
+                    break;
                 case 3:
-
+                    return;
             }
         } while(true);
     }

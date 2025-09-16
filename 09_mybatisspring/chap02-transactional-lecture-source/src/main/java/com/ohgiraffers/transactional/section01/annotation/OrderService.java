@@ -56,7 +56,11 @@ public class OrderService {
         System.out.println("주문 성공 후 방금 주문한 번호가 Order 엔티티에 들었는지 확인: " + order.getOrderCode());
 
         /* 설명. 5. tbl_order_menu 테이블에도 주문한 메뉴 갯수만큼 메뉴를 추가(insert) */
-
+        List<OrderMenuDTO> orderMenuDTO = orderInfo.getOrderMenus();
+        for(OrderMenuDTO menuDTO: orderMenuDTO){
+            orderMapper.insertOrderMenu(
+                    new OrderMenu(order.getOrderCode(), menuDTO.getMenuCode(), menuDTO.getOrderAmount()));
+        }
     }
 
     /* 설명. 사용자가 주문한 각 메뉴와 수량에 따른 총 주문금액 계산용 메소드 */

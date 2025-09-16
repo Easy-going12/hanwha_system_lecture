@@ -6,10 +6,12 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SpringBootTest
+@Transactional      // Test 클래스에도 @Transactional을 붙일 수 있는데 이렇게 되면 테스트 시 트랜잭션은 rollback 됨
 class MenuServiceTest {
 
     @Autowired

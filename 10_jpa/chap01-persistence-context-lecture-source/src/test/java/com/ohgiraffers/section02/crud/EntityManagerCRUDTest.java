@@ -59,8 +59,8 @@ public class EntityManagerCRUDTest {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        entityManager.persist(menu);    // 영속상태로 바꿈
-        transaction.commit();
+//        entityManager.persist(menu);    // 영속상태로 바꿈
+//        transaction.commit();
 
         try{
             entityManager.persist(menu);

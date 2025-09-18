@@ -1,22 +1,21 @@
-package com.ohgiraffers.section03.primarykey.subsection01.identity;
+package com.ohgiraffers.section03.primarykey.subsection02.table;
 
 import jakarta.persistence.*;
 
 import java.util.Date;
 
-@Entity(name="member_sectionn3_subsection01")
-@Table(name="tbl_member_section03_subsection01")
-public class Member {
+@Entity(name="member_sectionn3_subsection02")
+@Table(name="tbl_member_section03_subsection02")
+@TableGenerator(
+        name="member_seq_table_generator",
+        table="tbl_my_sequence",
+        pkColumnValue = "my_seq_member_no"
+)
 
-    /* 설명.
-     *  - IDENTITY: MySQL 또는 MariaDB의 auto_increment
-     *  - SEQUENCE: 데이터베이스의 시퀀스 객체 사용(Oracle의 SEQUENCE)
-     *  - TABLE: 키 생성 테이블 저장
-     *  - AUTO: 자동 선택(MySQL이면 IDENTITY/ORACLE이면 SEQUENCE)
-    * */
+public class Member {
     @Id
     @Column(name="member_no")
-//    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.TABLE, generator="member_seq_table_generator")
     private int memberNo;
 
     @Column(name="member_id")

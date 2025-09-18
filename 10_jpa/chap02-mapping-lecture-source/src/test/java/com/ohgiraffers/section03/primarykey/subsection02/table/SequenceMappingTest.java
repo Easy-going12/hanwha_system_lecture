@@ -1,4 +1,4 @@
-package com.ohgiraffers.section03.primarykey.subsection01.identity;
+package com.ohgiraffers.section03.primarykey.subsection02.table;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -6,34 +6,34 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import org.junit.jupiter.api.*;
 
-public class PrimaryKeyMappingTest {
+public class SequenceMappingTest {
     private static EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
     @BeforeAll
-    public static void initFactory(){
+    public static void initFactory() {
         entityManagerFactory = Persistence.createEntityManagerFactory("jpatest");
     }
 
     @BeforeEach
-    public void initManager(){
+    public void initManager() {
         entityManager = entityManagerFactory.createEntityManager();
     }
 
     @AfterEach
-    public void closeManager(){
+    public void closeManager() {
         entityManager.close();
     }
 
     @AfterAll
-    public static void closeFactory(){
+    public static void closeFactory() {
         entityManagerFactory.close();
     }
 
     @Test
-    public void 식별자_매핑_테스트(){
+    public void 식별자_매핑_테스트() {
         Member member = new Member();
-        member.setMemberNo(1);
+//        member.setMemberNo(1);
         member.setMemberId("user01");
         member.setMemberPwd("pass01");
         member.setNickname("홍길동");
@@ -44,7 +44,7 @@ public class PrimaryKeyMappingTest {
         member.setStatus("Y");
 
         Member member2 = new Member();
-        member.setMemberNo(2);
+//        member.setMemberNo(2);
         member2.setMemberId("user02");
         member2.setMemberPwd("pass02");
         member2.setNickname("유관순");
@@ -57,7 +57,7 @@ public class PrimaryKeyMappingTest {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
 
-        /* 설명. PK전략을 GenerationType.IDENTITY로 가져가면 persist 시점에 insert가 무조건 발생한다.(즉시 flush() 호출됨) */
+        /* 설명. PK전략을 GenerationType.TABLE 가져가면 commit 시점에 insert가 무조건 발생한다.(즉시 flush() 호출됨) */
         System.out.println("persist 전 member: " + member);
         entityManager.persist(member);
         entityManager.persist(member2);
@@ -70,7 +70,5 @@ public class PrimaryKeyMappingTest {
 
         transaction.commit();
 
-        /* 설명. insert 전에 영속상태의 엔티티 객체에는 pk값이 없었지만 persist 이후 find 시에는 존재 */
-        /* 설명. persist 시점에 insert가 날아감 */
     }
 }

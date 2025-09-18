@@ -79,7 +79,8 @@ public class Menu {
                 "menuCode=" + menuCode +
                 ", menuName='" + menuName + '\'' +
                 ", menuPrice=" + menuPrice +
-                ", category=" + category +
+//                ", category=" + category +
+                // 주석을 안 할 경우 Category 클래스에서도 toString을 요청하기 때문에 순환 참조 현상이 발생한다,
                 ", orderableStatus='" + orderableStatus + '\'' +
                 '}';
     }

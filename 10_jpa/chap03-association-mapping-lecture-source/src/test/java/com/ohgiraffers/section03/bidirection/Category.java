@@ -1,6 +1,5 @@
 package com.ohgiraffers.section03.bidirection;
 
-import com.ohgiraffers.section02.onetomany.Menu;
 import jakarta.persistence.*;
 
 import java.util.List;

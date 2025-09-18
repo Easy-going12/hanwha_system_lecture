@@ -1,0 +1,53 @@
+package com.ohgiraffers.section05.compositekey.subsection01.embedded;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity(name="member_section05_subsection01")
+@Table(name="tbl_member_section05_subsection01")
+public class Member {
+
+    @EmbeddedId
+    private MemberPK memberPK;
+
+    @Column(name="phone")
+    private String phone;
+
+    @Column(name="address")
+    private String address;
+
+    public Member() {
+    }
+
+    public Member(String address, MemberPK memberPK, String phone) {
+        this.address = address;
+        this.memberPK = memberPK;
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public MemberPK getMemberPK() {
+        return memberPK;
+    }
+
+    public void setMemberPK(MemberPK memberPK) {
+        this.memberPK = memberPK;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+}

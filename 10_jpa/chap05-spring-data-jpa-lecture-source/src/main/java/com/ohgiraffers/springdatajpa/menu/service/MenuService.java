@@ -6,7 +6,11 @@ import com.ohgiraffers.springdatajpa.menu.repository.MenuRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -20,6 +24,7 @@ public class MenuService {
         this.modelMapper = modelMapper;
     }
 
+    /* 설명. 1. findById(), Optional이 반환되는 점을 고려(get(), orElseXXX()) */
     public MenuDTO findMenuByCode(int menuCode) {
 
         Menu menu = menuRepository.findById(menuCode)
@@ -28,5 +33,17 @@ public class MenuService {
         log.debug("service계층에서 하나의 메뉴 상세보기: {}", menu);
 
         return modelMapper.map(menu, MenuDTO.class);
+    }
+
+    /* 설명. 2. findAll() (페이징 처리 전) => 데이터가 엄청 많을 경우 한 페이지에 표현은 좀 무섭다 */
+    public List<MenuDTO> findMenuList() {
+
+        /* 설명.  내가 원하는 속성에 대한 정렬 가능(feat.Sort,by) */
+        List<Menu> menus = menuRepository.findAll(Sort.by("menuCode").descending());
+        log.debug("service계층에서 모든 메뉴보기: {}", menus);
+
+        return menus.stream()
+                .map(menu-> modelMapper.map(menu, MenuDTO.class))
+                .collect(Collectors.toList());
     }
 }

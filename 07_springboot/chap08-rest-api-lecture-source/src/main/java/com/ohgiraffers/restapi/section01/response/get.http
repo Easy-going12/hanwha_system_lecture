@@ -1,0 +1,18 @@
+### GET request hello
+GET localhost:8080/response/hello
+
+
+### GET request random
+GET localhost:8080/response/random
+
+### GET request message
+GET localhost:8080/response/message
+
+### GET request test
+GET localhost:8080/response/test
+
+### GET request test
+GET localhost:8080/response/map
+
+### GET request image(1. byte[] 배열 방식)
+GET localhost:8080/response/image/bytes/pikachu

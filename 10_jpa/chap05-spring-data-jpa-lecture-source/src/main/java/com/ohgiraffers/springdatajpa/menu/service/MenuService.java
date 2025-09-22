@@ -129,4 +129,10 @@ public class MenuService {
         Menu foundMenu = menuRepository.findById(modifyMenu.getMenuCode()).get();
         foundMenu.setMenuName(modifyMenu.getMenuName());
     }
+
+    /* 설명. 7. delete 진행 */
+    @Transactional
+    public void deleteMenu(int menuCode) {
+        menuRepository.deleteById(menuCode);
+    }
 }

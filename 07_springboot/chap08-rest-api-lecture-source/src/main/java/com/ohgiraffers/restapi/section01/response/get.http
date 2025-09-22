@@ -1,7 +1,6 @@
 ### GET request hello
 GET localhost:8080/response/hello
 
-
 ### GET request random
 GET localhost:8080/response/random
 
@@ -11,8 +10,16 @@ GET localhost:8080/response/message
 ### GET request test
 GET localhost:8080/response/test
 
-### GET request test
+### GET request map
 GET localhost:8080/response/map
 
-### GET request image(1. byte[] 배열 방식)
-GET localhost:8080/response/image/bytes/pikachu
+### GET request image (1. byte[] 방식, 동적) => 작은 파일일때
+GET http://localhost:8080/response/image/bytes/pikachu
+
+### GET request image (2, WebConfig 방식, 정적) => 파일이 변하지 않을 때
+GET http://localhost:8080/response/image/charmander.png
+
+### GET request image (3, Resource 방식, 부분 동적, 캐시 비활성화, Http 1.0과 호환 가능(Pragma)) => 큰 파일일 때
+GET http://localhost:8080/response/image/resource/squirtle.png
+Cache-Control: no-cache
+Pragma: no-cache

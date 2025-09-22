@@ -1,5 +1,6 @@
 package com.ohgiraffers.restapi.section01.response;
 
+/* 설명. 응답 메세지 객체 */
 public class Message {
     private int httpStatusCode;
     private String message;

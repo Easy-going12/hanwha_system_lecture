@@ -1,7 +1,10 @@
 package com.ohgiraffers.springdatajpa.menu.service;
 
+import com.ohgiraffers.springdatajpa.menu.dto.CategoryDTO;
 import com.ohgiraffers.springdatajpa.menu.dto.MenuDTO;
+import com.ohgiraffers.springdatajpa.menu.entity.Category;
 import com.ohgiraffers.springdatajpa.menu.entity.Menu;
+import com.ohgiraffers.springdatajpa.menu.repository.CategoryRepository;
 import com.ohgiraffers.springdatajpa.menu.repository.MenuRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -11,8 +14,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,11 +26,15 @@ import java.util.stream.Collectors;
 public class MenuService {
     private final MenuRepository menuRepository;
     private final ModelMapper modelMapper;
+    private final CategoryRepository categoryRepository;
 
     @Autowired
-    public MenuService(MenuRepository menuRepository, ModelMapper modelMapper) {
+    public MenuService(MenuRepository menuRepository
+                     , ModelMapper modelMapper
+                     , CategoryRepository categoryRepository) {
         this.menuRepository = menuRepository;
         this.modelMapper = modelMapper;
+        this.categoryRepository = categoryRepository;
     }
 
     /* 설명. 1. findById(), Optional이 반환되는 점을 고려(get(), orElseXXX()) */
@@ -35,9 +45,32 @@ public class MenuService {
 
         log.debug("service계층에서 하나의 메뉴 상세보기: {}", menu);
 
-        return modelMapper.map(menu, MenuDTO.class);
+//        return modelMapper.map(menu, MenuDTO.class);
+        return menuTOMenuDTO(menu);
     }
 
+    /* 설명. ModelMapper 안쓰고 수동으로 매핑하는 법 */
+    MenuDTO menuTOMenuDTO(Menu menu){
+        MenuDTO menuDTO = new MenuDTO();
+        menuDTO.setMenuCode(menu.getMenuCode());
+        menuDTO.setMenuName(menu.getMenuName());
+        menuDTO.setMenuPrice(menu.getMenuPrice());
+        menuDTO.setCategoryCode(menu.getCategoryCode());
+        menuDTO.setOrderableStatus(menu.getOrderableStatus());
+
+        return menuDTO;
+    }
+
+    /* 설명. Controller와 Service 계층 사이는 DTO가 아닌 Map으로 처리도 가능하다.(feat. 다운캐스팅 조심) */
+    Map<String, Object> menuTOMenuMap(Menu menu){
+        Map<String, Object> menuMap = new HashMap<>();
+        menuMap.put("menuCode",menu.getMenuCode());
+        menuMap.put("menuName",menu.getMenuName());
+        menuMap.put("menuPrice",menu.getMenuPrice());
+        menuMap.put("categoryCode",menu.getCategoryCode());
+        menuMap.put("orderableStatus", menu.getOrderableStatus());
+        return menuMap;
+    }
 
     /* 설명. 2. findAll() (페이징 처리 전) => 데이터가 엄청 많을 경우 한 페이지에 표현은 좀 무섭다 */
 //    public List<MenuDTO> findMenuList() {
@@ -72,4 +105,28 @@ public class MenuService {
         return menuList.map(menu -> modelMapper.map(menu, MenuDTO.class));
     }
 
+    /* 설명. 4. jpql 및 native query 활용 */
+    public List<CategoryDTO> findAllCategory() {
+
+        List<Category> categories = categoryRepository.findAllCategories();
+
+        return categories.stream()
+                .map(category -> modelMapper.map(category, CategoryDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    /* 설명. 5. insert 진행 */
+    @Transactional
+    public void registMenu(MenuDTO newMenu) {
+        menuRepository.save(modelMapper.map(newMenu, Menu.class));
+    }
+
+    /* 설명. 6. update 진행 */
+    @Transactional
+    public void modifyMenu(MenuDTO modifyMenu) {
+
+        /* 설명. 수정할 메뉴를 가져와서(영속 상태로 만들어) 영속 상태인 객체를 수정하면 update */
+        Menu foundMenu = menuRepository.findById(modifyMenu.getMenuCode()).get();
+        foundMenu.setMenuName(modifyMenu.getMenuName());
+    }
 }

@@ -1,7 +1,10 @@
 package com.ohgiraffers.restapi.section02.responseentity;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.Date;
 
+@Schema(description = "사용자 정보 DTO")
 public class UserDTO {
     private int no;
     private String id;
@@ -11,7 +14,6 @@ public class UserDTO {
 
     public UserDTO() {
     }
-
     public UserDTO( int no,String id, String pwd, String name, Date enrollAt) {
         this.no = no;
         this.id = id;
@@ -70,4 +72,6 @@ public class UserDTO {
                 ", name='" + name + '\'' +
                 '}';
     }
+
+
 }

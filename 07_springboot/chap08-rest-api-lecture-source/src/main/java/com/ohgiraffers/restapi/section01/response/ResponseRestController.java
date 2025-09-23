@@ -1,5 +1,10 @@
 package com.ohgiraffers.restapi.section01.response;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -28,6 +33,11 @@ public class ResponseRestController {
         return "Hello World!";
     }
 
+    @Operation(summary = "랜덤 숫자 생성", description="1부터 1까지의 랜덤한 숫자를 변환")
+    @ApiResponses(value={
+            @ApiResponse(responseCode = "200", description = "성공",
+            content = @Content(mediaType = "application/json", schema=@Schema(type="integer", example="7")))
+    })
     @GetMapping("/random")
     public int getRandomNumber() {
         return (int)(Math.random() * 10) + 1;
@@ -78,7 +88,7 @@ public class ResponseRestController {
         return imageData;
     }
 
-    /* 설명. 2. Webconfig */
+    /* 설명. 2. WebConfig */
     /* 설명.
      *   직접 URL로 확장자를 포함한 파일 이름으로 접근 가능
      *   별도의 핸들러 메소드는 불필요하며 Spring이 자동으로 정적 리소스를 서빙

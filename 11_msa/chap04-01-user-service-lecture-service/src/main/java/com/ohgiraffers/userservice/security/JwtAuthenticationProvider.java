@@ -2,6 +2,7 @@ package com.ohgiraffers.userservice.security;
 
 import com.ohgiraffers.userservice.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,13 +18,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
-
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;     // 평문과 암호화 된 다이제스트를 비교하기 위한 도구
 
-    private final PasswordEncoder passwordEncoder;      // 평문과 암호화 된 다이제스트를 비교하기 위한 도구
-
+    @Autowired
     public JwtAuthenticationProvider(UserService userService
-                                   , PasswordEncoder passwordEncoder) {
+            , PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -39,18 +39,17 @@ public class JwtAuthenticationProvider implements AuthenticationProvider {
         /* 설명. DB에 있는 해당 회원의 정보 */
         UserDetails userDetails = userService.loadUserByUsername(email);
 
-        if(passwordEncoder.matches(pwd, userDetails.getPassword())) {
+        if(!passwordEncoder.matches(pwd, userDetails.getPassword())) {
             throw new BadCredentialsException("비밀번호가 일치하지 않습니다.");
         }
 
-        /* 설명. 에의가 발생하지 않고 이 부분 이후가 실행되면 UserDetails에 담긴(인증된 회원정보) 정보로 Token을 믄듦 */
+        /* 설명. 예외가 발생하지 않고 이 부분 이후가 실행되면 UserDetails에 담긴(인증된 회원정보) 정보로 Token을 만듦 */
 
         return new UsernamePasswordAuthenticationToken(
                 userDetails, null, userDetails.getAuthorities()
         );
     }
 
-    // 어떤 토큰을 처리할 수 있는가에 대한 메소드
     @Override
     public boolean supports(Class<?> authentication) {
         return UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication);

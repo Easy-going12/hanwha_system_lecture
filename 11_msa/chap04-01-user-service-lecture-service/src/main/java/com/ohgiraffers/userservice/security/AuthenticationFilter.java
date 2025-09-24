@@ -2,21 +2,26 @@ package com.ohgiraffers.userservice.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ohgiraffers.userservice.dto.RequestLoginDTO;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.User;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,10 +46,10 @@ import java.util.stream.Collectors;
  *             iat: 토큰 활성화(발급) 시간(issued at))
  * 설명.
  *       b. 공개 클레임(public claim)
- *          : 사용자 정의 클레임으로 공개용 정보를 위해 사용(충돌 방지를 위해 URI로 구성)
+ *       	: 사용자 정의 클레임으로 공개용 정보를 위해 사용(충돌 방지를 위해 URI로 구성)
  * 설명.
  *       c. 비공개 클레임(private claim)
- *         : 사용자 정의 클레임으로 서버(JWT 발급자)와 클라이언트 사이에 임의로 지정한 정보를 저장
+ *      	: 사용자 정의 클레임으로 서버(JWT 발급자)와 클라이언트 사이에 임의로 지정한 정보를 저장
  *            (충돌 발생 우려가 있어 조심해서 사용할 것)
  * 설명.
  *  3. 서명(Verify Signature)
@@ -60,7 +65,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         /* 설명. 우리가 만든 프로바이더를 알고 있는 매니저를 인지시킴 */
         super(authenticationManager);
-
         this.env = env;
     }
 
@@ -77,7 +81,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         }
     }
 
-    // Authentication authResult가 로그인 성공 시에 되돌아와서 값이 들어가질 곳이다.
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response,
@@ -86,22 +89,30 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         log.info("로그인 성공 이후 spring security가 Authentication 객체로 관리되며 넘어옴: {}", authResult);
 
         /* 설명. JWT 토큰 제작 */
-        /* 설명. 1.JWT 토큰 제작을 위한 재료 추출 */
+        /* 설명. 1. JWT 토큰 제작을 위한 재료 추출 */
         /* 설명. 프로바이더에서 반환한 내용 중 User의 내용은 Principal로 저장되어 있음 */
         /* 설명. 토큰의 payload에 (id, 가진 권한들, 만료시간)을 담을 예정 */
         String id = ((User)authResult.getPrincipal()).getUsername();
         log.info("회원의 아이디(이메일): {}", id);
 
         List<String> roles = authResult.getAuthorities().stream()
-                        .map(role->role.getAuthority())
-                        .collect(Collectors.toList());
-
+//                               .map(role -> role.getAuthority())
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
         log.info("List<String> 형태로 뽑아낸 로그인 한 회원의 권한들: {}", roles);
         log.info("만료 시간: {}", env.getProperty("token.expiration_time"));
 
         /* 설명. 2. 재료를 활용한 JWT 토큰 제작(feat. build.gradle에 라이브러리 추가) */
+        Claims claims = Jwts.claims().setSubject(id);
+        claims.put("auth",roles);
 
+        String token = Jwts.builder()
+                .setClaims(claims)
+                .setExpiration(new Date(System.currentTimeMillis()
+                        + Long.parseLong(env.getProperty("token.expiration_time"))))
+                .signWith(SignatureAlgorithm.HS512, env.getProperty("token.secret"))
+                .compact();
+
+        response.addHeader("token", token);
     }
 }
-
-

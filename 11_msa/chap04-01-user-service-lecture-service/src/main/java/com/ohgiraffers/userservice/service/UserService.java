@@ -6,4 +6,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 // security 규약에서 UserDetailsService를 상속받는다.
 public interface UserService extends UserDetailsService {
     void registUser(UserDTO userDTO);
+
+    UserDTO getUserById(String memNo);
 }

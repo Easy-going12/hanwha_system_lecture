@@ -1,18 +1,18 @@
 package com.ohgiraffers.userservice.service;
 
 import com.ohgiraffers.userservice.aggregate.UserEntity;
+import com.ohgiraffers.userservice.dto.ResponseOrderDTO;
 import com.ohgiraffers.userservice.dto.UserDTO;
+import com.ohgiraffers.userservice.infrastructure.OrderServiceClient;
 import com.ohgiraffers.userservice.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
-import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
     UserRepository userRepository;
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    OrderServiceClient orderServiceClient;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository,
@@ -55,10 +56,17 @@ public class UserServiceImpl implements UserService {
         userRepository.save(userEntity);
     }
 
+    /* 설명. 단순 회원정보 조회 -> 회원정보 + 회원의 주문내역(Order(다른 도매인)) */
     @Override
     public UserDTO getUserById(String memNo) {
         UserEntity user = userRepository.findById(Long.parseLong(memNo)).get();
         UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+
+        /* 설명. 회원이 주문한 내역을 Order 서비스에서 Feign client 방식으로 조회해서 가져오기 */
+        List<ResponseOrderDTO> orderList = orderServiceClient.getUserOrders(memNo);
+
+        userDTO.setOrders(orderList);
+
         return userDTO;
     }
 

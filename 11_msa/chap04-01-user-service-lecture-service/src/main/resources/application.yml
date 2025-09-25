@@ -1,5 +1,5 @@
 server:
-  port: 8111
+  port: 0
 
 spring:
   application:
@@ -25,3 +25,12 @@ hello:
 token:
   expiration_time: 432000000
   secret: xpE+UWC69VMF9gUa0EXgXoO7wh9FOIZCdpuYnw8DaUR9JYGPj1Rs7Pqpfr35pNuDAbkwAknY4KlDD37bzN2G6A==
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka

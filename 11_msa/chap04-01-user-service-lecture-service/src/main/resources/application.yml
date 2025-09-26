@@ -22,9 +22,10 @@ spring:
 hello:
   message: Welcome to 19th SW-Camp
 
-token:
-  expiration_time: 432000000
-  secret: xpE+UWC69VMF9gUa0EXgXoO7wh9FOIZCdpuYnw8DaUR9JYGPj1Rs7Pqpfr35pNuDAbkwAknY4KlDD37bzN2G6A==
+#설명. 12시간의 만료 시간 + HMackSha 512 비밀킬
+#token:
+#  expiration_time: 432000000
+#  secret: xpE+UWC69VMF9gUa0EXgXoO7wh9FOIZCdpuYnw8DaUR9JYGPj1Rs7Pqpfr35pNuDAbkwAknY4KlDD37bzN2G6A==
 
 eureka:
   instance:

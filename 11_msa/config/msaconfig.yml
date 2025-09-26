@@ -1,0 +1,6 @@
+token:
+  expiration_time: 432000000
+  secret: xpE+UWC69VMF9gUa0EXgXoO7wh9FOIZCdpuYnw8DaUR9JYGPj1Rs7Pqpfr35pNuDAbkwAknY4KlDD37bzN2G6A==
+
+test:
+  message: abc123

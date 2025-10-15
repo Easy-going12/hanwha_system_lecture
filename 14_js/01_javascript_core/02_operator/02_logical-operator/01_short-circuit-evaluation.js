@@ -16,8 +16,8 @@ var num = 2;
 num % 2 == 0 && console.log('짝수입니다.');     // &&일 때는 좌측이 true여야 우측이 실행
 num % 2 == 0 || console.log('홀수입니다.');     // ||일 때는 좌측이 false여야 우측이 실행
 
-if(num % 2 == 0){
-    console.log('짝수입니다.');
-} else{
-    console.log('홀수입니다.');
-}
+// if(num % 2 == 0){
+//     console.log('짝수입니다.');
+// } else{
+//     console.log('홀수입니다.');
+// }

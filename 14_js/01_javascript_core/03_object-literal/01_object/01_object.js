@@ -4,7 +4,7 @@
 */
 var name = '홍씨';
 var age = 10;
-console.log(globalThis);
+console.log(this);
 
 var student = {
 
@@ -13,12 +13,13 @@ var student = {
   age: 16,
 
   /* 기능 프로퍼티(=메서드) */
+  /* 메서드 안에서는 this.을 반드시 쓰지(안쓰면 전역 변수(global 객체의 property)가 나올 수 있음) */
   getInfo: function(){
-    return `${this.name}(은)는 ${this.age}세 입니다.`;      // this를 붙쳐야 메서드를 선언하고 있는 함수 내에 있는 속성을 사용한다.
+    return `${this.name}(은)는 ${this.age}세 입니다.`;  // this는 메서드를 포함한 객체를 의미
   }
 };
 
 console.log('student',student);
 console.log('이름:',student.name);
 console.log('나이:',student.age);
-console.log('정보:',student.getInfo());
+console.log('정보:',student.getInfo());     // 메서드는 소괄호(())를 통해 실행도 가능

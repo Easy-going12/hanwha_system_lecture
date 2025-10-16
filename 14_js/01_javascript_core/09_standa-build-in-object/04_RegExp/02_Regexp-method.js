@@ -9,7 +9,7 @@
 
 
 const target = "Java JavaScript";
-const regex = /va/g;
+const regex = /va/g;    // exec를 쓸 때는 정규표현식을 변수에 담아야 찾고 다음 것을 또 검색할 수 있다.(정보 유지)
 
 /* 1. exec: 정규표현식에서 제공하는 메소드로 인수로 문자열을 주면 패턴을 찾아 반환(한번에 하나씩) */
 console.log(regex.exec(target));
@@ -19,4 +19,28 @@ console.log(regex.exec("hello"));   // 패턴과 일치하지 않으면 null 반
 /* 2. test: 정규표현식에서 제공하는 메소드로 매칭 결과를 boolean으로 반환 */
 console.log(/va/.test(target));
 
-/* 3. match */
+/* 3. match: 문자열이 제공하는 메소드로 인수로 정규표현식을 주면 패턴을 찾아 배열로 반환
+             (패턴과 일치하는 문제열을 한번에 확인하기 용이)
+*/
+
+console.log(target.match(/va/g).length);
+console.log("패턴과 일치하는 문자열 갯수:",target.match(/va/g).length);
+
+/* multiline 플래그 옵션 예제 */
+const text = `첫 번째 줄
+두 번째 줄
+세 번째 줄`;
+
+const regex1 =/^두/;
+console.log(regex1.exec(text));
+
+const regex2 =/^두/m;
+console.log(regex2.exec(text));
+
+const regex3 =/줄$/;
+console.log(regex3.exec(text));
+
+const regex4 =/줄$/gm;
+console.log(regex4.exec(text));
+console.log(regex4.exec(text));
+console.log(regex4.exec(text));

@@ -19,7 +19,7 @@ function Child(name, age){
 }
 
 /* 부모 생성자의 prototype을 복사(복사된 prototype의 새로운 constructor도 탄생) */
-Child.prototype = Object.create(Parent.prototype);  //프로토타입
+Child.prototype = Object.create(Parent.prototype);  //프로토타입만 생성
 
 Child.prototype.sayAge = function(){
     console.log(`I'm ${this.age} years old`);
@@ -29,5 +29,31 @@ Child.prototype.sayAge = function(){
 Child.prototype.constructor = Child;
 
 const child = new Child('홍길동', 20);
-child.sayHello();
-child.sayAge();
+child.sayHello();   // Parent의 prototype에 있는 기능
+child.sayAge();     // Child꺼 prototype에 있는 기능
+
+/* ----------- 추가로 js의 class 문법 찾기 ----------- */
+class Parent2 {
+    constructor(name) {
+        this.name = name;
+    }
+
+    sayHello() {
+        console.log(`Hello, I'm ${this.name}`);
+    }
+}
+
+class Child2 extends Parent2 {
+    constructor(name, age) {
+        super(name);
+        this.age = age;
+    }
+
+    sayAge() {
+        console.log(`I'm ${this.age} years old`)
+    }
+}
+
+const child2 = new Child2("유관순",15);
+child2.sayHello();
+child2.sayAge();

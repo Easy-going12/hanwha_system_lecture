@@ -41,4 +41,4 @@ console.log(dog2);
 
 console.log(Dog.prototype);
 console.log(dog1.constructor);
-console.log(dog1.__proto__);
+console.log(dog1.__proto__.constructor);

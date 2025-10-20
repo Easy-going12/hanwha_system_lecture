@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function increase(number){
+
+            /* promise: 비동기 결과(성공/실패)를 가진 객체(콜백 지옥을 피하기 위해 사용됨)
+                        비동기 함수들을 동기식으로 진행할 때 필수적인 객체(일종의 비동기 함수 포장지)
+            */
+            const promise = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    const result = number + 10;
+
+                    // 실패히나는 경우
+                    if(result > 50) {
+                        const e = new Error('NumberTooBig');
+
+                        return reject(e);
+                    }
+
+                    // 성공하는 경우
+                    return resolve(result);
+                }, 1000);
+            });
+
+            return promise;
+        }
+
+        console.log(increase(0));
+
+        // 비동기 함수를 실행하지만, promise 함수를 반환한다.
+        increase(0)
+        .then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        })
+        .then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        })
+        .then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        })
+        .then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            return increase(result);
+        })
+        .then(result => {
+            console.log('then의 콜백함수에 넘어온 result:', result);
+            // return increase(result);
+        })
+        .catch(error => console.log(error))
+        .finally(() => console.log('반드시 실행되고 반드시 해야 할 작업'));
+    </script>
+</body>
+</html>

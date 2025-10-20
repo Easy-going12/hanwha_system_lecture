@@ -68,13 +68,17 @@
             /* 3-3 bodyUsed */
             console.log(`넘어온 결과인 json 문자열(결과 데이터)를 사용했는지 여부: ${response.bodyUsed}`);
 
+            /* 3-3-1. json으로 꺼내기 */
             // const json = await response.json(); // json 문자열(통신의 결과 body에 담긴 내용) -> json 객체(파싱)
             // console.log(json);
             // console.log(`사용 여부(json): ${response.bodyUsed}`);
+            // console.log(JSON.stringify(json));       // JSON 객체 -> JSON 문자열
 
-            const text = await response.text(); // json 문자열(통신의 결과 body에 담긴 내용) -> json 객체(파싱)
+            /* 3-3-2. string으로 꺼내기 */
+            const text = await response.text(); // json 문자열(통신의 결과 body에 담긴 내용) -> json 문자열(그대로)
             console.log(text);
             console.log(`사용 여부(text): ${response.bodyUsed}`);
+            console.log(JSON.parse(text));              // JSON문자열 -> JSON 객체
         }
 
         callAPI();

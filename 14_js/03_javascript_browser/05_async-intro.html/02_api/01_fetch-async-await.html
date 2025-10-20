@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        async function callAPI() {
+            /* GET을 제외한 나머지 http method 방식을 할 때는 fetch의 두 번째 인자로 객체 형태로 부가 정보를 넘길 수 있음 */
+            // const promise = fetch('http://jsonplaceholder.typicode.com/users', {
+            //                         method: "POST",
+            //                         headers: {
+            //                         "Content-Type": "application/json",
+            //                         },
+                                    
+            //                         body: JSON.stringify({
+            //                             name: '홍씨',
+            //                             age: 2
+            //                         }), 
+            // });
+            const promise = fetch('http://jsonplaceholder.typicode.com/users');
+            // console.log(promise);
+
+            // const response = await promise;
+            // console.log(response);
+
+            // const jsonPromise = respons.json();
+            // const result = await jsonPromise;
+            // console.log(result);            // 전체화면
+            // console.log(result[2].name);    // 3번째 회원 이름
+
+            /* 1. fetch의 결과인 promise를 then 메소드 활용 */
+            promise.then(response => {
+                console.log('then을 통한 fetch 이후 promise의 결과:', response);
+            });
+
+            /* 2. async await 활용 */
+            const response = await promise;
+            console.log('await를 통한 fetch 이후 promise의 결과: ', response);
+
+            console.log(`응답 상태: ${response.status}`);
+            console.log(`응답 헤더: ${response.headers}`);
+        }
+
+        callAPI();
+    </script>
+</body>
+</html>

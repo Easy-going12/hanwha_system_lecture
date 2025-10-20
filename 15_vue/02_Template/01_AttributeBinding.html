@@ -73,8 +73,8 @@
                         (단, template 영역에서는 둘 다 .value를 쓸 필요가 없다.)
                 */
 
-                const refObj = ref({test:'ttt'});
-                const reactiveObj = reactive({test:'abc'});
+                const refObj = ref({test:'ttt'});               // 화면의 재료 X
+                const reactiveObj = reactive({test:'abc'});     // 화면의 재료 X
                 const activation = () => {
                     console.log('isTrue의 값:',isTrue.value);
                     console.log('refObj:', refObj.value);

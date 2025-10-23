@@ -1,6 +1,8 @@
 <template>
     <div class="parentContainer">
         <input type="text" v-model="dynamicName">
+
+        
         <DynamicChild>
 
             <!-- #[]는 동적 태그 이름을 사용할 때 사용한다. -->

@@ -2,7 +2,9 @@
 <script setup>
   // import MyComponent from './components/01_component/MyComponent.vue';
   import MyComponent from '@/components/01_component/MyComponent.vue';
-
+  import SlotParent from './components/02_slotintro/SlotParent.vue';
+  import NameParent from './components/03_namedslot/NameParent.vue';
+  import DynamicParent from './components/04_dynamicslot/DynamicParent.vue';
 
 </script>
 
@@ -13,7 +15,9 @@
     </div>
   </header>
   <main>
-
+    <SlotParent/>
+    <NameParent/>
+    <DynamicParent/>
   </main>
 </template>
 

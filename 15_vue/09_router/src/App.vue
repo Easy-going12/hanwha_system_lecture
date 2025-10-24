@@ -15,8 +15,8 @@
       <RouterLink to="/" active-class="active">Home</RouterLink><br>
       <RouterLink to="/pathvariable/1" active-class="active">PathVariable</RouterLink><br>
       <RouterLink to="/querystring?name=홍길동&age=20" active-class="active">QueryString</RouterLink>
-    </nav>
-    <h2>nested router</h2> -->
+    </nav> -->
+    <h2>nested router</h2> 
     <nav>
       <RouterLink to="/" active-class="active">Home</RouterLink>
       <RouterLink to="/nested/home" active-class="active" replace>중첩</RouterLink>

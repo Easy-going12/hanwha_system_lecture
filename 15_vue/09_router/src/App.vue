@@ -2,13 +2,19 @@
   import {RouterLink, RouterView} from 'vue-router';
 </script>
 
+<!--
+  RouterLink
+  1. to 속성을 쓰면 url 주소를 바꿔준다. (클라이언트 라우팅, location.href 속성을 바꾸는 것과 같은 효과를 발생한다.)
+  2. active-class를 쓰면 활성화된 버튼에 class 속성을 부여해서 css 적용
+  3. replace를 쓰면 뒤로 가기를 맞는 효과를 낼 수 있다.
+-->
 <template>
   <header>
     <h2>basic router</h2>
     <nav>
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/pathvariable/1">PathVariable</RouterLink>
-      <RouterLink to="/querystring?name=홍길동&age=20">QueryString</RouterLink>
+      <RouterLink to="/" active-class="active">Home</RouterLink><br>
+      <RouterLink to="/pathvariable/1" active-class="active">PathVariable</RouterLink><br>
+      <RouterLink to="/querystring?name=홍길동&age=20" active-class="active">QueryString</RouterLink>
     </nav>
   </header>
   <main>
@@ -17,4 +23,31 @@
 </template>
 
 <style scoped>
+  nav {
+    width: 100%;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 30px;
+  }
+
+  a {
+    margin-left: 10px;
+  }
+
+  .active {
+    color: red;
+    text-decoration: none;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header {
+    text-align: center;
+  }
 </style>

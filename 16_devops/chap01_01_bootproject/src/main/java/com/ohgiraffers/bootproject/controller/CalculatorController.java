@@ -20,6 +20,11 @@ public class CalculatorController {
         this.calculatorService = calculatorService;
     }
 
+    @GetMapping("/health")
+    public String healthCheck(){
+        return "I'm Alive!";
+    }
+
     @GetMapping("/plus")
     public ResponseEntity<CalculatorDTO> plusTwoNumbers(CalculatorDTO calculatorDTO) {
         log.info("calculatiorDTO = {}", calculatorDTO);

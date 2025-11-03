@@ -25,8 +25,17 @@ public class CalculatorController {
         return "I'm Alive!";
     }
 
-    @GetMapping("/plus")
-    public ResponseEntity<CalculatorDTO> plusTwoNumbers(CalculatorDTO calculatorDTO) {
+//    @GetMapping("/plus")
+//    public ResponseEntity<CalculatorDTO> plusTwoNumbers(CalculatorDTO calculatorDTO) {
+//        log.info("calculatiorDTO = {}", calculatorDTO);
+//        int result = calculatorService.plusTwoNumbers(calculatorDTO);
+//        calculatorDTO.setSum(result);
+//
+//        return ResponseEntity.ok(calculatorDTO);
+//    }
+
+    @PostMapping("/plus")
+    public ResponseEntity<CalculatorDTO> plusTwoNumbers(@RequestBody CalculatorDTO calculatorDTO) {
         log.info("calculatiorDTO = {}", calculatorDTO);
         int result = calculatorService.plusTwoNumbers(calculatorDTO);
         calculatorDTO.setSum(result);

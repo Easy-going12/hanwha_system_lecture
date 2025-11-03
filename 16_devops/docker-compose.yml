@@ -1,0 +1,28 @@
+## docker-compose를 사용하면 여러개의 이미지 및 컨테이너를 다룰 수 있다.
+
+services:
+  springboot-app:
+    build:
+      context: ./chap01_01_bootproject
+      dockerfile: Dockerfile
+    image: easygoing123/boot_19_project
+    container_name: boot-container
+    ports:
+      - "8055:7777"
+    networks:
+      - camp-net
+  
+  vue-app:
+    build:
+      context: ./chap01_02_vueproject
+      dockerfile: Dockerfile
+    image: easygoing123/vue_19_project
+    container_name: vue-container
+    ports:
+      - "8011:5173"
+    networks:
+      - camp-net
+
+networks:
+  camp-net:
+    driver: bridge

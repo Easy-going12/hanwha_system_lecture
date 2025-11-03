@@ -23,6 +23,10 @@ services:
     networks:
       - camp-net
 
+## 네트워크 드라이버 옵션
+## 1. bridge: 기본 값, 대부분의 경우에 적합하며 컨테이너 사설 네트워크
+## 2. host: 호스트 네트워클 직접 사용, 성능은 좋지만 보안에 취약하며 포트가 겹칠 수 있음
+## 3. none: 네트워크 기능 없이 완전히 격리된 상태
 networks:
   camp-net:
     driver: bridge

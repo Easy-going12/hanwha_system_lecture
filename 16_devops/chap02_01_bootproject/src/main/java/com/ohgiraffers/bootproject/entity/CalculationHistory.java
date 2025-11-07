@@ -34,7 +34,7 @@ public class CalculationHistory {
 
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
+        createdAt = LocalDateTime.now().plusHours(9);
     }
 
     public CalculationHistory(Integer num1, Integer num2, Integer result) {
